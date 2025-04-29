@@ -1,0 +1,125 @@
+body{
+  margin-top: 74px;
+ padding-top: 1px;
+padding-bottom: 15px ;
+  background-color: whitesmoke;
+  width: auto;
+  height: auto;
+}
+.notification-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .notification-header {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #6a1b9a;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #ba68c8;
+    padding-bottom: 12px;
+  }
+  
+  .notification-card {
+    background-color: #ffffff;
+    border-left: 10px solid #ba68c8;
+    border-radius: 12px;
+    padding: 10px 30px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 12px rgba(186, 104, 200, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .notification-card:hover {
+    box-shadow: 0 8px 16px rgba(186, 104, 200, 0.3);
+  }
+  
+  .notif-title {
+    font-size: 20px;
+    color: #4a148c;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  
+  .notif-info {
+    color: #555;
+    font-size: 15px;
+    margin: 6px 0;
+  }
+  
+  .notif-date {
+    text-align: right;
+    font-size: 13px;
+    color: #888;
+    margin-top: 12px;
+  }
+  
+  
+  /* Style pour le conteneur des notifications */
+/* Style général pour le message "Aucune notification" */
+.no-notifications {
+  display: flex;
+  align-items: center;              /* Centrer l'icône et le texte verticalement */
+  justify-content: center;          /* Centrer le texte et l'icône horizontalement */
+  text-align: center;               /* Centrer le texte horizontalement */
+  font-size: 18px;                  /* Taille de la police */
+  color: #555;                      /* Couleur du texte */
+  margin-top: 30px;                 /* Espacement supérieur */
+  padding: 20px 30px;               /* Espacement intérieur : 20px en haut et bas, 30px à gauche et à droite */
+  background-color: #fff;           /* Fond blanc pour l'élégance */
+  border: 1px solid #f0f0f0;       /* Bordure grise claire */
+  border-radius: 10px;              /* Coins arrondis */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Ombre légère pour l'effet de profondeur */
+  width: 80%;                       /* Largeur du conteneur */
+  max-width: 600px;                 /* Largeur maximale */
+  margin-left: auto;                /* Centrer horizontalement */
+  margin-right: auto;               /* Centrer horizontalement */
+  transition: all 0.3s ease;        /* Transition fluide pour les changements */
+}
+
+/* Style pour l'icône */
+.no-notifications i {
+  font-size: 30px;                  /* Taille de l'icône */
+  color: #ff8c00;                   /* Couleur orange pour l'icône (vous pouvez la personnaliser) */
+  margin-right: 15px;               /* Espacement entre l'icône et le texte */
+  animation: bounce 1s infinite;    /* Animation de rebond de l'icône */
+}
+
+/* Animation de rebond pour l'icône */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Style pour le texte dans le message */
+.no-notifications p {
+  font-weight: bold;              /* Texte en gras */
+  color: #555;                    /* Couleur de texte douce */
+  font-size: 1.2em;                /* Taille de texte plus grande */
+  margin: 0;                       /* Suppression de la marge par défaut */
+}
+
+/* Ajouter un effet de survol pour un effet interactif */
+.no-notifications:hover {
+  transform: translateY(-5px);    /* Légère remontée au survol */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Ombre un peu plus marquée */
+}
+
+mat-icon {
+   font-size: 20px;                  /* Taille de l'icône */
+  color: #8614b3;
+  padding: 5px;
+  margin-right: 10px;
+                 /* Couleur de l'icône (orange ici, ajustez selon votre besoin) */
+}

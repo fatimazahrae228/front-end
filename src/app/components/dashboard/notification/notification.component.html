@@ -1,0 +1,22 @@
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar-etu>*ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
+<app-db-sidebar>*ngIf="user.etat == 'admin'"></app-db-sidebar>
+<body>
+<div class="notification-container">
+  <h2 class="notification-header">📬 LA BOÎTE DE NOTIFICATION</h2>
+  
+  <div *ngFor="let notif of notifications" class="notification-card">
+    <div class="notif-title"><mat-icon>notifications</mat-icon> {{ notif.planning.title }}</div>
+    <div class="notif-info"><mat-icon>calendar_month</mat-icon><strong>Date & Heure :</strong> {{ notif.planning.datetime }}</div>
+    <div class="notif-info"><mat-icon>timer</mat-icon><strong>Durée :</strong> {{ notif.planning.duration }} heure(s)</div>
+    <div class="notif-info"><mat-icon>description</mat-icon><strong>Description :</strong> {{ notif.planning.description }}</div>
+    <div class="notif-info"><mat-icon>person</mat-icon><strong>Formateur :</strong> {{ notif.planning.formateur.prenom }} {{ notif.planning.formateur.nom }}</div>
+    <div class="notif-date"><mat-icon>calendar_today</mat-icon>Créée le : {{ notif.dateCreated }}</div>
+  </div>
+  
+  <div *ngIf="notifications.length == 0" class="no-notifications">
+    <i class="mat-icon">info</i>
+    <p>Aucune notification pour le moment.</p>
+  </div>
+</div>
+</body>

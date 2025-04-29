@@ -1,0 +1,77 @@
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for>
+<app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
+<body>
+  <!-- Bouton pour ouvrir la modale -->
+  <div class="btn">
+  <button (click)="openModal()">Ajouter un étudiant</button></div>
+  
+  <!-- Modale -->
+  <div class="modal-backdrop" *ngIf="showModal">
+    <div class="modal-content">
+      <div style="text-align: center;"><h3>REMPLIR CE FORMULAIRE</h3></div>
+      
+  
+      <form>
+        <label>Nom :</label>
+        <input type="text" [(ngModel)]="etudiant.nom" [ngModelOptions]="{standalone: true}" class="form-control" id="name" placeholder="Entrez le nom">
+  
+        <label>Prénom :</label>
+        <input type="text" [(ngModel)]="etudiant.prenom" [ngModelOptions]="{standalone: true}" class="form-control" id="prenom" placeholder="Entrez le prénom">
+  
+        <label>Téléphone :</label>
+        <input type="text" [(ngModel)]="etudiant.numTelephone" [ngModelOptions]="{standalone: true}" class="form-control" id="mobile" placeholder="Entrez le numéro de téléphone">
+  
+        <label>Email :</label>
+        <input type="text" [(ngModel)]="etudiant.email" [ngModelOptions]="{standalone: true}" class="form-control" id="email" placeholder="Entrez l'email">
+  
+        <label>Mot de passe :</label>
+        <input type="password" [(ngModel)]="etudiant.motsPasse" [ngModelOptions]="{standalone: true}" class="form-control" id="motdepasse" placeholder="Entrez le mot de passe">
+  
+        <div class="modal-buttons">
+          <button type="button" (click)="save()">Envoyer</button>
+          <button type="button" (click)="closeModal()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="rect">
+      <h5>Table des étudiants inscrits</h5>
+        <table class="table-bordered">
+            <thead>
+             <h1 *ngIf="!isResultLoaded">Chargement.................</h1>
+             
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Numéro de téléphone</th>
+                <th>Email</th>
+                <th>Mot de passe</th>
+                <th>Option</th>
+              </tr>
+            
+            </thead>
+        
+            <tbody>
+                <tr *ngFor="let etudiant of etudiantArray">
+     
+                <th>{{etudiant.id  }}</th>
+                <td>{{etudiant.nom  | uppercase}}</td>
+                <td>{{etudiant.prenom }}</td>
+                <td>{{etudiant.numTelephone }}</td>
+                <td>{{etudiant.email }}</td>
+                <td>{{etudiant.motsPasse }}</td>
+                <td>
+                  <button type="button"  (click)="setUpdate(etudiant)"><mat-icon>edit</mat-icon></button>
+                  
+                  <button type="button"  (click)="setDelete(etudiant.id)"><mat-icon>delete</mat-icon></button>
+                
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div> 
+      
+  </body>

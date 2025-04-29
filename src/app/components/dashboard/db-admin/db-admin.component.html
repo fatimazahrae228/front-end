@@ -1,0 +1,50 @@
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar></app-db-sidebar>
+ <body>
+ 
+  <div class="stat-card-container">
+    <mat-card class="stat-card">
+    <mat-card-content>
+    <div class="card-header">
+        <mat-icon>school</mat-icon>
+        <mat-card-title>Étudiants</mat-card-title>
+      </div>
+      <h2 style="text-align: center">{{etudiantCount}}</h2>
+    </mat-card-content>
+</mat-card>
+
+    <mat-card class="stat-card">
+        <mat-card-content>
+            <div class="card-header">
+                <mat-icon>supervisor_account</mat-icon>
+                <mat-card-title>Formateurs</mat-card-title>
+            </div>
+            <h2 style="text-align: center">{{formateurCount}}</h2>
+    </mat-card-content>
+    </mat-card>
+ 
+    
+    <mat-card class="stat-card">
+      <mat-card-content>
+          <div class="card-header">
+              <mat-icon>manage_accounts</mat-icon>
+              <mat-card-title>Admins</mat-card-title>
+
+              
+          </div>
+          <h2 style="text-align: center">{{adminCount}}</h2>
+  </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-card-content>
+    <div class="card-header">
+        <mat-icon>groups</mat-icon>
+        <mat-card-title>Utilisateurs</mat-card-title>
+      </div>
+      <h2 style="text-align: center">{{userCount}}</h2>
+    </mat-card-content>
+</mat-card>
+  
+  </div>
+ </body>

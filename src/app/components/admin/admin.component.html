@@ -1,0 +1,69 @@
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar></app-db-sidebar>
+<body>
+  <div class="btn">
+    <button (click)="openModal()">Ajouter un autre admin</button></div>
+
+    <div class="modal-backdrop" *ngIf="showModal">
+      <div class="modal-content">
+        <div style="text-align: center;"><h3>REMPLIR CE FORMULAIRE</h3></div>
+<form>
+      <label>Nom :</label>
+      <input type="text" [(ngModel)]="admin.nom" [ngModelOptions]="{standalone: true}" class="form-control" id="name" placeholder="Entrez le nom">
+ 
+        <label>Prénom :</label>
+        <input type="text" [(ngModel)]="admin.prenom" [ngModelOptions]="{standalone: true}" class="form-control" id="address" placeholder="Entrez le prénom">
+  
+        <label>Téléphone :</label>
+        <input type="text" [(ngModel)]="admin.numTelephone" [ngModelOptions]="{standalone: true}" class="form-control" id="mobile" placeholder="Enterz le numéro de téléphone">
+  
+        <label>Email :</label>
+        <input type="text" [(ngModel)]="admin.email" [ngModelOptions]="{standalone: true}"  class="form-control" id="address" placeholder="Entrez l'email">
+    
+        <label>Mot de passe :</label>
+        <input type="text" [(ngModel)]="admin.motsPasse" [ngModelOptions]="{standalone: true}"  class="form-control" id="address" placeholder="Entrez le mot de passe">
+        <div class="modal-buttons">
+        <button type="submit" (click)="save()" >Envoyer</button>
+    <button type="button" (click)="closeModal()">Annuler</button></div>
+  </form>
+</div>
+</div>
+
+<div class="rect">
+  <h5>Table des admins</h5>
+    <table class="table-bordered">
+        <thead>
+         <h1 *ngIf="!isResultLoaded">Chargement.................</h1>
+         
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Numéro de téléphone</th>
+            <th>Email</th>
+            <th>Mot de passe</th>
+            <th>Option</th>
+          </tr>
+        
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let admin of adminArray">
+ 
+            <th>{{admin.id  }}</th>
+            <td>{{admin.nom  | uppercase}}</td>
+            <td>{{admin.prenom }}</td>
+            <td>{{admin.numTelephone }}</td>
+            <td>{{admin.email }}</td>
+            <td>{{admin.motsPasse}}</td>
+            <td>
+              <button type="button"  (click)="setUpdate(admin)"><mat-icon>edit</mat-icon></button>
+              
+              <button type="button"  (click)="setDelete(admin.id)"><mat-icon>delete</mat-icon></button>
+            
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div> 

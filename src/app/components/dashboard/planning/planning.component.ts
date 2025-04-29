@@ -1,0 +1,105 @@
+import { CommonModule,} from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component , AfterViewInit } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DbSidebarForComponent } from '../db-sidebar-for/db-sidebar-for.component';
+import { DbNavbarComponent } from '../db-navbar/db-navbar.component';
+
+declare var JitsiMeetExternalAPI: any;
+@Component({
+  selector: 'app-planning',
+  imports: [ CommonModule , FormsModule , DbSidebarForComponent , DbNavbarComponent ] ,
+  templateUrl: './planning.component.html',
+  styleUrl: './planning.component.css'
+})
+export class PlanningComponent  {
+  planning = {
+    title: '',
+    datetime: '',
+    duration: 1,
+    description: '',
+    formateur: {
+      id: null  // L'ID sera inséré automatiquement
+    }
+  };
+
+  plannings: any[] = [];
+  formateurs: any[] = [];
+  message = '';
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.getFormateurs();
+    this.getPlannings();
+    this.setFormateurFromLocalStorage();  // Ajouter cette ligne pour configurer automatiquement l'ID du formateur
+  }
+
+  // ✅ Récupère les formateurs depuis l'API
+  getFormateurs() {
+    this.http.get<any[]>('http://localhost:8081/api/formateurs').subscribe(data => {
+      this.formateurs = data;
+    });
+  }
+
+  // ✅ Récupère les plannings existants
+  getPlannings() {
+    this.http.get<any[]>('http://localhost:8081/api/plannings').subscribe(data => {
+      this.plannings = data;
+    });
+  }
+
+  // ✅ Insère automatiquement l'ID du formateur dans le planning
+  setFormateurFromLocalStorage() {
+    const storedUser = localStorage.getItem('user');
+    console.log('storedUser:', storedUser); // pour debug
+
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        console.log('Utilisateur extrait:', user);
+
+        // On suppose que l'ID du formateur est le même que l'ID de l'utilisateur connecté
+        this.planning.formateur.id = user.id;  // Assigne l'ID de l'utilisateur connecté au formateur du planning
+        console.log('ID du formateur automatique:', this.planning.formateur.id);
+      } catch (e) {
+        console.error("Erreur de parsing JSON:", e);
+      }
+    } else {
+      console.warn('Aucun utilisateur dans le localStorage');
+    }
+  }
+
+  // ✅ Envoie du planning avec l'ID du formateur sélectionné
+  submitPlanning() {
+    const body = {
+      ...this.planning,
+      formateur: {
+        id: this.planning.formateur.id
+      }
+    };
+
+    this.http.post('http://localhost:8081/api/plannings', body).subscribe({
+      next: () => {
+        this.message = 'Live planifié avec succès !';
+        this.getPlannings();
+      },
+      error: () => this.message = 'Erreur lors de la planification.'
+    });
+  }
+   resetPlanning() {
+  this.planning = {
+    title: '',
+    datetime: '',
+    duration: 1,
+    description: '',
+    formateur: {
+      id: null
+    }
+  };
+  this.message = '';
+}
+}

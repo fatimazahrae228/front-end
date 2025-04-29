@@ -1,0 +1,96 @@
+/* Style général */
+body {
+  font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+  
+  margin-top: 74px;
+  padding-top: 10px;
+}
+.rect{
+  width: 700px;
+  padding: 0px;
+  background-color:rgb(255, 255, 255) ;
+  border-radius: 10px;
+  margin: auto;
+  padding-top: 1px;
+padding-bottom: 1px;
+   
+  }
+
+/* Conteneur principal */
+h2 {
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  color: rgb(163, 87, 214);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h3 {
+  margin-top: 40px;
+  color: #333;
+}
+
+form {
+  background-color: #e6e6e650;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 550px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ 
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 16px;
+  color: rgb(129, 56, 177);
+  display: block;
+  margin-bottom: 5px;
+  
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size:16px ;
+  margin-top: 10px;
+}
+
+input, textarea {
+outline: none;
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+ 
+}
+
+input[type="datetime-local"], input[type="number"] {
+  padding-left: 10px;
+}
+button {
+  background-color: rgb(129, 56, 177);
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 7px 15px;
+  border: none;
+  margin-top: 14px;
+  cursor: pointer;
+}
+.button-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center; /* Centre horizontalement les boutons */
+ 
+}
+p{
+
+  margin-left: 183px;
+ color :  rgb(115, 66, 148);
+ font-size: 25px;
+}

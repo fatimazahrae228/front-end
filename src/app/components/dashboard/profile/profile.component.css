@@ -1,0 +1,78 @@
+body{
+    width:100%;
+    margin-top: 75px;
+    position: absolute;
+   
+}
+.photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #ddd; /* pour voir le fond si pas d'image */
+    margin: auto;
+    box-shadow: 0 0 8px rgba(252, 252, 252, 0.993); /* optionnel */
+
+}
+.photo img{
+  
+    object-fit: cover; 
+    width: 150px;
+   
+   
+}
+div{
+    
+font-family: Georgia, 'Times New Roman', Times, serif;
+ text-align: start;
+ color:whitesmoke;
+padding-top:10px ;
+padding: 20px;
+
+background-color: rgb(139, 16, 150);
+width: 70%;
+border-radius: 10px;
+
+}
+
+button{
+background-color: rgba(235, 235, 235, 0.63); 
+  font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    color: black;
+   font-weight: bold;
+   padding: 5px;
+}
+input{
+    text-align: center;
+    outline: none;
+    margin-left: 10px;
+}
+div .input{
+    
+    display: flex;
+justify-content: center;
+margin: auto;
+}
+ .passwd , .valider{
+margin:auto;
+display: flex;
+justify-content: center;
+}
+div .modification{
+  
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+
+}
+.info{
+font-weight: bold;
+display: block;
+justify-content: start;
+}

@@ -1,0 +1,74 @@
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar></app-db-sidebar>
+<body>
+  <div class="btn">
+    <button (click)="openModal()">Ajouter un formateur</button></div>
+    
+    <!-- Modale -->
+    <div class="modal-backdrop" *ngIf="showModal">
+      <div class="modal-content">
+        <div style="text-align: center;"><h3>REMPLIR CE FORMULAIRE</h3></div>
+<form>
+      <label>Nom :</label>
+      <input type="text" [(ngModel)]="formateur.nom" [ngModelOptions]="{standalone: true}" class="form-control" id="name" placeholder="Entrez le nom">
+ 
+        <label>Prénom :</label>
+        <input type="text" [(ngModel)]="formateur.prenom" [ngModelOptions]="{standalone: true}" class="form-control" id="address" placeholder="Entrez le prénom">
+  
+        <label>Téléphone :</label>
+        <input type="text" [(ngModel)]="formateur.numTelephone" [ngModelOptions]="{standalone: true}" class="form-control" id="mobile" placeholder="Enterz le numéro de téléphone">
+  
+        <label>Email :</label>
+        <input type="text" [(ngModel)]="formateur.email" [ngModelOptions]="{standalone: true}"  class="form-control" id="address" placeholder="Entrez l'email">
+    
+        <label>Mot de passe :</label>
+        <input type="text" [(ngModel)]="formateur.motsPasse" [ngModelOptions]="{standalone: true}"  class="form-control" id="motdepasse" placeholder="Entrez le mot de passe">
+        <div class="modal-buttons">
+        <button type="submit" (click)="save()" >Envoyer</button>
+    <button type="button" (click)="closeModal()">Annuler</button></div>
+  </form>
+</div>
+</div>
+
+
+<div class="rect">
+  <h5>Table des formateurs inscrits</h5>
+    <table class="table-bordered">
+        <thead>
+         <h1 *ngIf="!isResultLoaded">Chargement.................</h1>
+         
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Numéro de téléphone</th>
+            <th>Email</th>
+            <th>Mots de passe</th>
+            <th>Option</th>
+          </tr>
+        
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let formateur of formateurArray">
+ 
+            <th>{{formateur.id  }}</th>
+            <td>{{formateur.nom  | uppercase}}</td>
+            <td>{{formateur.prenom }}</td>
+            <td>{{formateur.numTelephone }}</td>
+            <td>{{formateur.email }}</td>
+            <td>{{formateur.motsPasse }}</td>
+            <td>
+              <button type="button"  (click)="setUpdate(formateur)"><mat-icon>edit</mat-icon></button>
+              
+              <button type="button"  (click)="setDelete(formateur.id)"><mat-icon>delete</mat-icon></button>
+            
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div> 
+  </body>
+
+   

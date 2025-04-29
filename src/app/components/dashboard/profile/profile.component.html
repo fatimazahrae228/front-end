@@ -1,0 +1,43 @@
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
+<app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for> 
+<app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
+<body>
+<div class="container">
+    <div class="photo">
+    <img 
+      [src]="photoPreview ? photoPreview : user.photoUrl" alt="Photo de profil" />
+    </div>
+    <!-- Bouton de sélection de photo -->
+  <div *ngIf="!photoPreview" class="modification">
+    <button type="button" (click)="fileInput.click()">Changer ma photo</button>
+        <input type="file" #fileInput (change)="onPhotoSelectionnee($event)" style="display: none;" />
+        <button *ngIf="user.photoUrl" (click)="supprimerPhoto()">Supprimer ma photo</button>
+        </div>
+
+    <!-- Boutons Confirmer / Annuler après sélection d'une nouvelle photo -->
+    <div *ngIf="photoPreview" class="modification">
+      <button (click)="uploadPhoto()">Confirmer</button>
+      <button (click)="annulerPhoto()">Annuler</button>
+    </div>
+    <hr>
+    <div *ngIf="user">
+    <p><strong>Nom:</strong> {{ user.nom }}</p>
+<p><strong>Prénom:</strong> {{ user.prenom }}</p>
+<p><strong>Role:</strong> {{ user.etat }}</p>
+<p><strong>Numéro de téléphone:</strong> {{ user.numTelephone }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+    <button class="passwd" (click)="showPasswordForm = true">Modifier le mot de passe</button>
+
+    <form *ngIf="showPasswordForm" (ngSubmit)="updatePassword()">
+      <div class="input">
+        <input type="password" [(ngModel)]="oldPassword" name="oldPassword" placeholder="Ancien mot de passe" required>
+        <input type="password" [(ngModel)]="newPassword" name="newPassword" placeholder="Nouveau mot de passe" required>
+      </div>
+      <button type="submit" class="valider">Valider</button>
+    </form>
+
+
+</div>
+</body>

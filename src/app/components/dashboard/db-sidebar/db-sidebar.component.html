@@ -1,0 +1,56 @@
+<body>
+<div class="dashboard-container" [class.sidebar-collapsed]="isSidebarCollapsed">
+  
+  <!-- 🟣 Sidebar -->
+   <div class="nav">
+  <div class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <button class="menu-toggle" (click)="toggleSidebar()">
+      <mat-icon>{{ isSidebarCollapsed ? 'menu' : 'close' }}</mat-icon>
+    </button>
+    <h2>Admin</h2>
+
+      <ul class="menu">
+        <li class="active">
+          <a routerLink="/db-admin">
+            <mat-icon>home</mat-icon>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/etudiant">
+            <mat-icon>school</mat-icon>
+            <span>Étudiant</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/formateur">
+            <mat-icon>group</mat-icon>
+            <span>Formateur</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/cours">
+            <mat-icon>book</mat-icon>
+            <span>Cours</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin">
+            <mat-icon>add</mat-icon>
+            <span>Admin</span>
+          </a>
+        </li>
+        <hr>
+        <li>
+          <a (click)="logout()">
+            <mat-icon>logout</mat-icon>
+     <span>Déconnecter</span>
+            
+        </a>
+        </li>
+      </ul>
+  </div>
+  </div>
+ 
+</div>
+</body>

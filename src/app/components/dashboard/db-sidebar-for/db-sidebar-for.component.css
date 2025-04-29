@@ -1,0 +1,119 @@
+body{
+    margin: 0;
+    margin-bottom: 0px;
+    padding: 0px;
+    width: 0px;
+    height: 0px;
+  }
+  
+  /* 🟣 Sidebar */
+  .sidebar {
+    position: fixed;
+    padding-top: 18px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    height: 100%;
+    color: #fff;
+    overflow: hidden;
+    background: linear-gradient(#891eb3fd, #7029b3);
+    z-index: 1000; /* Assure que la sidebar est au-dessus de la navbar */
+  }
+  
+  .sidebar h2 {
+    font-size: 25px;
+    margin-left: 70px;
+    margin-bottom: 32px;
+    color: rgb(255, 255, 255);
+    
+  }
+  
+  
+  
+  .sidebar .menu {
+    list-style: none;
+    height: 100%;
+    position: relative;
+    padding: 0;
+  }
+  
+  .sidebar .menu li {
+    padding: 13px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  
+  .sidebar .menu a {
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 115px;
+    cursor: pointer;
+  }
+  
+  mat-icon {
+    font-family: "Material Icons" !important;
+    font-size: 24px !important;
+    min-width: 24px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .sidebar .menu a mat-icon {
+    margin-right: 10px;
+  }
+  
+  .sidebar .menu li:hover,
+  .sidebar .menu li.active {
+    background-color: #e0e0e058;
+    padding-left: 14px;
+  }
+  
+  /* 🔴 Sidebar réduit */
+  .sidebar.collapsed {
+    width: 70px;
+    overflow: hidden;
+    padding-top: 30px;
+    padding-left: 2px;
+  }
+  
+  .sidebar.collapsed h2 {
+    display: none;
+  }
+  .sidebar.collapsed .menu{
+    margin-top: 90px;
+  }
+  .sidebar.collapsed .menu span {
+    display: none;
+  }
+  
+  
+  
+  /* 🔴 Ajuster le contenu quand le sidebar est réduit */
+  .sidebar-collapsed .main-content {
+    margin: 0;
+  }
+  
+  /* 📌 Bouton pour ouvrir/fermer la sidebar */
+  .menu-toggle {
+    margin-bottom: 40px;
+    margin-left: 13px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 8px;
+  }
+  
+  nav a mat-icon {
+    color: rgb(145, 54, 180);
+  }
+
+  
+  

@@ -1,0 +1,26 @@
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar-for></app-db-sidebar-for>
+<body>
+    <div class="rect">
+<h2>PLANIFICATION D'UN LIVE</h2>
+
+<form (ngSubmit)="submitPlanning()">
+  <label>Titre :</label>
+  <input type="text" [(ngModel)]="planning.title" name="title" required />
+
+  <label>Date et Heure :</label>
+  <input type="datetime-local" [(ngModel)]="planning.datetime" name="datetime" required />
+
+  <label>Durée (en heures) :</label>
+  <input type="number" [(ngModel)]="planning.duration" name="duration" required />
+
+  <label>Description :</label>
+  <textarea [(ngModel)]="planning.description" name="description" required></textarea>
+ 
+  <div class="button-row">
+  <button type="submit">Planifier</button>
+  <button type="button" (click)="resetPlanning()">Annuler</button></div>
+</form>
+
+<p *ngIf="message">{{ message }}</p></div>
+</body>

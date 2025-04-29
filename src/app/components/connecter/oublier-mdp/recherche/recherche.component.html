@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="recherche.component.css">
+    <title>Vérification du Code</title>
+    
+</head>
+<body>
+
+    <img src="/assets/log-landing-Photoroom (1) (1).png" alt="img-login">
+<div class="recherche">
+    <div class="container">
+        <h2>ENTREZ LE CODE DE SÉCURITÉ</h2>
+        <p>Vous avez dû recevoir un texto avec un code sur votre E.mail. Ce code contient 6 caractères.</p>
+        
+        <div class="input-box">
+
+            
+            <input type="text" maxlength="1" class="input-code" (input)="moveToNext($event, 1)">
+            <input type="text" maxlength="1" class="input-code" (input)="moveToNext($event, 2)">
+            <input type="text" maxlength="1" class="input-code" (input)="moveToNext($event, 3)">
+            <input type="text" maxlength="1" class="input-code" (input)="moveToNext($event, 4)">
+            <input type="text" maxlength="1" class="input-code" (input)="moveToNext($event, 5)">
+            <input type="text" maxlength="1" class="input-code" (input)="moveToNext($event, 6)">
+        </div>
+
+        <div class="info">
+            Nous avons envoyé votre code à : 
+        </div>
+
+        <a href="#" class="code-link">Code non reçu ?</a>
+
+        <div class="buttons">
+            <button class="btn cancel" routerLink="/connecter">Annuler</button>
+            <button class="btn confirm">Continuer</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

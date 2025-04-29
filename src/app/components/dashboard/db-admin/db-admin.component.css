@@ -1,0 +1,54 @@
+body{
+  background-color: whitesmoke;
+  width: auto;
+  padding-top: 100px;
+}
+  .stat-card-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .stat-card {
+    width: 200px;
+    height: 20vh;
+    background: linear-gradient(135deg, #ff4081, #7c4dff); /* Gradient color */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10 px;
+  }
+  
+  .card-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centre le texte et l'icône ensemble */
+    gap: 10px; /* Ajoute un espace entre l'icône et le texte */
+  }
+  
+  .stat-card-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  
+  .student-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+ 
+  .count {
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  h1{
+    margin-left: 450px;
+  }
