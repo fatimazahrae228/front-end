@@ -1,7 +1,12 @@
 <app-db-navbar></app-db-navbar>
 <app-db-sidebar-for></app-db-sidebar-for>
 <body>
-    <div class="rect">
+  <div class="btn">
+    <button (click)="openModal()">Ajouter une planification</button>
+  </div>
+  <div class="modal-backdrop" *ngIf="showModal">
+    <div class="modal-content">
+      <div class="container">
 <h2>PLANIFICATION D'UN LIVE</h2>
 
 <form (ngSubmit)="submitPlanning()">
@@ -19,8 +24,33 @@
  
   <div class="button-row">
   <button type="submit">Planifier</button>
-  <button type="button" (click)="resetPlanning()">Annuler</button></div>
+  <button type="button"  (click)="closeModal()">Annuler</button></div>
 </form>
 
-<p *ngIf="message">{{ message }}</p></div>
+<p *ngIf="message">{{ message }}</p></div></div></div>
+
+
+<div *ngIf="plannings.length > 0">
+  <h3>MES PLANIFICATIONS</h3>
+  <ul>
+    <div *ngIf="message" class="success-message">
+      {{ message }}
+    </div>
+    <li *ngFor="let planning of plannings">
+      <strong>{{ planning.title }}</strong> - {{ planning.datetime }} - {{ planning.duration }}h
+      <p>{{ planning.description }}</p>
+      
+      <!-- Bouton de suppression -->
+      <button (click)="deletePlanning(planning.id)"><mat-icon>delete</mat-icon></button>
+    </li>
+  </ul>
+</div>
+
+
+<div *ngIf="plannings.length == 0">
+  <p>Aucune planification disponible pour le moment.</p>
+</div>
+
+
+
 </body>

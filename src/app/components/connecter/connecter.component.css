@@ -79,7 +79,7 @@ img{
 
 .login__label,
 .login__label--checkbox {
-	color: rgba(255, 255, 255, 0.5);
+	color: rgba(255, 255, 255, 0.541);
 	text-transform: uppercase;
 	font-size: .75rem;
 	margin-bottom: 1rem;

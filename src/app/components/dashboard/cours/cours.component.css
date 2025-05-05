@@ -1,0 +1,173 @@
+body{
+  font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+  
+  margin-top: 74px;
+  padding-top: 10px;;
+}
+.container {
+  width: 400px;
+  height: 96.9vh;
+  margin: 40px auto;
+  background-color: #f5f5f5;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+h2{
+  display: flex;
+  justify-content: center;
+margin: auto;  
+margin-bottom: 20px;
+color: rgb(163, 87, 214);
+}
+
+
+form input, form select {
+  outline: none;
+   color: (115, 66, 148);
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button{
+  
+  font-size: 1px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(127, 13, 180);
+  margin-top: 5px;
+  margin-right: 3px;
+   margin-left: 3px;
+  color: whitesmoke;
+}
+form button{
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color:rgb(127, 13, 180);
+  color: whitesmoke;
+   margin-left: 65px;
+   padding: 7px;
+   font-size: 18px;
+   outline: none;
+}
+
+.message{
+ color :   #6a1b9a;;
+ font-size: 25px;
+ display: flex;
+ justify-content: center;
+margin: auto;
+margin-top: 5px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  color : rgb(115, 66, 148);
+  display: block;
+  font-weight: bold;
+}
+.btn{
+  border: none;
+}
+.btn button{
+  border: none;
+  margin-left: 70px;
+  width: 250px;
+  height: 100%;
+  font-size: 22px;
+  padding: 5px;
+  margin-top: 30px;
+}
+
+ul {
+  list-style: none;
+  padding-right: 50px;
+  margin: 35px;
+  margin-left: 50px;
+  
+}
+
+li {
+ 
+  background-color: #ffffff;
+  border-left: 6px solid #ba68c8;;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+li strong {
+  font-size: 1.3rem;
+  color:#4a148c;
+}
+
+.ad{
+  display: flex;
+gap: 10px; 
+}
+li .ad {
+  width:106px;
+float : right;
+}
+button mat-icon{
+width: 29px;
+height: 100%;
+gap :200px;
+
+}
+.search-bar {
+  margin: auto;
+  margin-top: 15px;
+  width: 69%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  background-color: #bebcbc07;
+  padding: 20px;
+  border-radius: 8px;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(105, 15, 146, 0.199);
+}
+
+.search-bar input[type="text"],
+.search-bar select { 
+  text-align: center;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width:150px;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-bar button {
+  background-color:  rgb(127, 13, 180);
+  color: white;
+  border: none;
+  padding: 5px 21px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+

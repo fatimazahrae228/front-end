@@ -1,1 +1,82 @@
-<h1>Cours travail </h1>
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for> 
+<app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
+<app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
+<body>
+<!-- Modal d'ajout -->
+<div class="btn">
+  <button (click)="openModal()"  *ngIf="user.etat && (user.etat == 'formateur' || user.etat == 'admin')">Ajouter un cours</button>
+</div>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-content">
+    <div class="container">
+      <h2>AJOUTER UN COURS</h2>
+      <form (ngSubmit)="submitCours()">
+        <label>Titre du cours :</label>
+        <input type="text" [(ngModel)]="nouveauCours.titre" name="titre" required>
+
+        <label>Filière :</label>
+        <select [(ngModel)]="nouveauCours.filiere" name="filiere">
+          <option>SMA</option><option>SMI</option><option>SMP</option>
+          <option>SMC</option><option>SVI</option><option>STU</option>
+        </select>
+
+        <label>Niveau :</label>
+        <select [(ngModel)]="nouveauCours.niveau" name="niveau">
+          <option>S1</option><option>S2</option><option>S3</option>
+          <option>S4</option><option>S5</option><option>S6</option>
+        </select>
+
+        <label>Type :</label>
+        <select [(ngModel)]="nouveauCours.type" name="type">
+          <option>Gratuit</option><option>Payant</option>
+        </select>
+
+        <label>Fichier PDF :</label>
+        <input type="file" (change)="onFileSelected($event)" required>
+
+        <div class="modal-buttons">
+          <button type="submit">Ajouter</button>
+          <button type="button" (click)="closeModal()">Annuler</button>
+        </div>
+      </form>
+      <div *ngIf="message" class="message">{{ message }}</div>
+    </div>
+  </div>
+</div>
+
+<!-- Barre de recherche -->
+<div class="search-bar">
+  <input type="text" [(ngModel)]="rechercheCours.titre" placeholder="Rechercher par titre">
+  <select [(ngModel)]="rechercheCours.filiere">
+    <option value="">Toutes les filières</option>
+    <option>SMA</option><option>SMI</option><option>SMP</option>
+    <option>SMC</option><option>SVI</option><option>STU</option>
+  </select>
+
+  <select [(ngModel)]="rechercheCours.niveau">
+    <option value="">Tous les niveaux</option>
+    <option>S1</option><option>S2</option><option>S3</option>
+    <option>S4</option><option>S5</option><option>S6</option>
+  </select>
+
+  <select [(ngModel)]="rechercheCours.type">
+    <option value="">Tous les types</option>
+    <option>Gratuit</option><option>Payant</option>
+  </select>
+
+  <button (click)="appliquerFiltre()"><mat-icon>search</mat-icon></button>
+</div>
+
+<!-- Liste des cours -->
+<ul>
+  <li *ngFor="let cours of coursFiltresAppliques">
+    <strong>{{ cours.titre }}</strong> - {{ cours.filiere }} / {{ cours.niveau }} / {{ cours.type }}
+    <div class="ad">
+      <button (click)="ouvrirPdf(cours.pdfUrlView)"><mat-icon>visibility</mat-icon></button>
+      <button (click)="telechargerPdf(cours.pdfUrlDownload)"><mat-icon>download</mat-icon></button>
+    </div>
+  </li>
+</ul>
+</body>

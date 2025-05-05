@@ -2,29 +2,20 @@
 body {
   font-family: Arial, sans-serif;
   background-color: whitesmoke;
+  height :auto;
   margin: 0;
   padding: 0;
-  
+  margin-left: 70px;
   margin-top: 74px;
   padding-top: 10px;
 }
-.rect{
-  width: 700px;
-  padding: 0px;
-  background-color:rgb(255, 255, 255) ;
-  border-radius: 10px;
-  margin: auto;
-  padding-top: 1px;
-padding-bottom: 1px;
-   
-  }
 
-/* Conteneur principal */
 h2 {
   font-size: 35px;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   color: rgb(163, 87, 214);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -34,15 +25,6 @@ h3 {
   color: #333;
 }
 
-form {
-  background-color: #e6e6e650;
-  padding: 10px;
-  border-radius: 8px;
-  max-width: 550px;
-  margin: 20px auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- 
-}
 
 form div {
   margin-bottom: 15px;
@@ -72,7 +54,7 @@ outline: none;
 input[type="datetime-local"], input[type="number"] {
   padding-left: 10px;
 }
-button {
+.container button {
   background-color: rgb(129, 56, 177);
   color: white;
   font-weight: bold;
@@ -81,6 +63,7 @@ button {
   border: none;
   margin-top: 14px;
   cursor: pointer;
+ 
 }
 .button-row {
   display: flex;
@@ -93,4 +76,100 @@ p{
   margin-left: 183px;
  color :  rgb(115, 66, 148);
  font-size: 25px;
+}
+.btn{
+  border: none;
+}
+.btn button{
+  border: none;
+  border-radius: 5px;
+  margin-left: 80px;
+  width: 290px;
+  height: 100%;
+  font-size: 1.3rem;
+  color: whitesmoke;
+  padding: 7px;
+  margin-top: 30px;
+  background-color: rgb(127, 13, 180);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.699);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  color : rgb(115, 66, 148);
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display: block;
+  width: 40%;
+
+}
+
+
+
+
+h3{
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 35px;
+  color: rgb(163, 87, 214);
+  margin-bottom: 25px;
+}
+
+/* Liste des plannings */
+ul {
+  list-style-type: none;
+  margin-left:80px;
+  width: 82%;
+}
+
+li {
+  color: #4a148c;;
+  background-color: #fff;
+  border-left: 4.5px solid  #ba68c8;
+  padding: 15px 20px;
+  margin-bottom: 13px;
+  border-radius: 6px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+li p{
+  color: #3d393f8a;
+  margin-left: 0px;
+  font-size: 20px;
+}
+li button{
+  background-color: #8614b3;
+  border-radius: 10px;
+  color : white;
+  border: none;
+  display: inline;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+ width: 4%;
+}
+mat-icon{
+  font-size: 23px;
+ padding-top: 2px;
+  
+}
+strong{
+  font-size: 25px;
+}
+.success-message {
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
 }

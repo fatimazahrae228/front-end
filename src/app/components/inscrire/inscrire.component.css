@@ -1,6 +1,6 @@
 img{
 	width: 100%;
-	height: 100vh;
+	height: 103vh;
 	position: relative;
 	display: block;
 
@@ -163,3 +163,7 @@ img{
 	
 }
 
+input::placeholder {
+	color: rgb(75, 70, 70);
+	opacity: 1; /* facultatif, certains navigateurs mettent une opacité par défaut */
+  }
