@@ -18,11 +18,10 @@
   <h2>TROUVEZ VOTRE COPMPTE</h2>n
   <p>Veuillez entrer votre e-mail .</p>
 
-  <input type="text" placeholder="E-mail" class="input-field" />
-
+  <input type="text" [(ngModel)]="email" placeholder="E-mail" class="input-field" />
   <div class="button-group">
     <button class="cancel-btn" routerLink="/connecter">Annuler</button>
-    <button class="search-btn" routerLink="/recherche">Rechercher</button>
+    <button class="search-btn" (click)="sendCode()">Rechercher</button>
 
   </div>
 </div> 

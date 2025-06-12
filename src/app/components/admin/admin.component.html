@@ -36,12 +36,10 @@
          <h1 *ngIf="!isResultLoaded">Chargement.................</h1>
          
         <tr>
-            <th>ID</th>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Numéro de téléphone</th>
             <th>Email</th>
-            <th>Mot de passe</th>
             <th>Option</th>
           </tr>
         
@@ -50,12 +48,10 @@
         <tbody>
             <tr *ngFor="let admin of adminArray">
  
-            <th>{{admin.id  }}</th>
             <td>{{admin.nom  | uppercase}}</td>
             <td>{{admin.prenom }}</td>
             <td>{{admin.numTelephone }}</td>
             <td>{{admin.email }}</td>
-            <td>{{admin.motsPasse}}</td>
             <td>
               <button type="button"  (click)="setUpdate(admin)"><mat-icon>edit</mat-icon></button>
               

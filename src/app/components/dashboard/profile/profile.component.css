@@ -1,10 +1,13 @@
 body{
     width:100%;
+    height:auto;
     margin-top: 75px;
     position: absolute;
-   
+   background-color: whitesmoke;
+  
 }
 .photo{
+   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,19 +25,19 @@ body{
     object-fit: cover; 
     width: 150px;
    
-   
 }
 div{
-    
+   
 font-family: Georgia, 'Times New Roman', Times, serif;
  text-align: start;
- color:whitesmoke;
+ color:white;
 padding-top:10px ;
-padding: 20px;
-
+padding: 15px;
 background-color: rgb(139, 16, 150);
-width: 70%;
+width: 50%; 
 border-radius: 10px;
+margin-bottom: 5px;
+margin-top: 5px;
 
 }
 
@@ -45,34 +48,59 @@ background-color: rgba(235, 235, 235, 0.63);
     border-radius: 10px;
     color: black;
    font-weight: bold;
-   padding: 5px;
+   padding:5px;
 }
 input{
     text-align: center;
     outline: none;
     margin-left: 10px;
+   outline: none;
+   border: none;
+  border-radius: 5px;
+  height: 5vh;
 }
 div .input{
-    
+ 
+ height: 10vh;
     display: flex;
 justify-content: center;
 margin: auto;
 }
- .passwd , .valider{
+ .passwd , .valider , .env{
 margin:auto;
 display: flex;
 justify-content: center;
 }
+
 div .modification{
   
-    justify-content: center;
+
     margin: auto;
     display: flex;
+    justify-content: center;
     gap: 20px;
+    width: 100%;
 
 }
+
 .info{
+    padding: 0;
+   
+color: rgb(194, 173, 194);
 font-weight: bold;
-display: block;
-justify-content: start;
+width: 80%;
+margin-left: 100px;
+}
+.p{
+    display: flex;
+    justify-content: center;
+}
+.info p strong{
+    color:whitesmoke;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.visibility{
+   background: none;
+   color:#ddd;
 }

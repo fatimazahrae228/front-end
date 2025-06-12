@@ -1,8 +1,18 @@
 body{
-    width:auto;
+  position:absolute;
+    width:100%;
     margin-top: 74px;
-    padding-bottom: 0.5px;
     background-color: whitesmoke;
-    height: 1;
     padding-left:80px;
   }
+  .container{
+    background-color: rgb(255, 255, 255);
+    color:#891eb3fd;
+    border-radius: 10px;
+    padding: 30px;
+  margin-top: 90px;
+  width: 80%;
+  font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  

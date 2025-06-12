@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DbSidebarComponent } from '../db-sidebar/db-sidebar.component';
@@ -36,6 +36,8 @@ import { DbSidebarEtuComponent } from '../db-sidebar-etu/db-sidebar-etu.componen
     formateur: { id: null as number | null }
   };
 
+   isLiked: boolean = false;
+
   rechercheCours = {
     titre: '',
     niveau: '',
@@ -47,12 +49,21 @@ import { DbSidebarEtuComponent } from '../db-sidebar-etu/db-sidebar-etu.componen
   message: string = '';
   listeCours: any[] = [];
   coursFiltresAppliques: any[] = [];
+  likedCourses: { [id: number]: boolean } = {};
+  likesCount: { [id: number]: number } = {};
+userId : number | null = null ;
+  private baseUrl = 'http://localhost:8081/api/evaluations';
+  
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getCours();
     this.setFormateurFromLocalStorage();
+       this.loadAllLikesCounts();
+         this.loadCourses();
+ 
+  
 
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -62,25 +73,53 @@ import { DbSidebarEtuComponent } from '../db-sidebar-etu/db-sidebar-etu.componen
           .subscribe(data => {
             this.user = data;
             localStorage.setItem('user', JSON.stringify(data));
+            this.loadUserEvaluations(); 
           });
       } catch (e) {
         console.error("Erreur parsing JSON:", e);
       }
-    }
+    } 
   }
-
-  getCours(): void {
-    this.http.get<any[]>('http://localhost:8081/api/cours').subscribe(data => {
-      this.listeCours = data;
-
-      this.listeCours.forEach(cours => {
-        cours.pdfUrlView = this.getPdfUrl(cours.id, false);
-        cours.pdfUrlDownload = this.getPdfUrl(cours.id, true);
-      });
-
-      this.coursFiltresAppliques = [...this.listeCours]; // Initialiser la liste affichée
+  
+loadCourses(): void {
+  this.http.get<any[]>('http://localhost:8081/api/cours')
+    .subscribe(data => {
+      this.courses = data;
+      this.loadAllLikesCounts(); // Maintenant qu’on a les cours
     });
-  }
+}
+
+getCours(): void {
+  this.http.get<any[]>('http://localhost:8081/api/cours').subscribe(data => {
+    this.listeCours = data;
+
+    this.listeCours.forEach(cours => {
+      const extension = cours.fichierNom?.split('.').pop()?.toLowerCase();
+
+      let fileType = 'autre';
+      if (extension) {
+        if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+          fileType = 'image';
+        } else if (['mp4', 'avi', 'mov', 'webm'].includes(extension)) {
+          fileType = 'video';
+        } else if (extension === 'pdf') {
+          fileType = 'pdf';
+        }
+        
+      }
+
+      cours.fileType = fileType;
+
+      // Ajouter les URLs de visualisation / téléchargement
+      cours.pdfUrlView = this.getPdfUrl(cours.id, false);
+      cours.pdfUrlDownload = this.getPdfUrl(cours.id, true);
+    
+         
+    });
+
+    this.coursFiltresAppliques = [...this.listeCours]; // Copie pour les filtres
+  });
+}
 
   openModal() {
     this.showModal = true;
@@ -112,11 +151,11 @@ import { DbSidebarEtuComponent } from '../db-sidebar-etu/db-sidebar-etu.componen
 
     this.http.post('http://localhost:8081/api/cours', formData).subscribe({
       next: () => {
-        this.message = 'Cours ajouté avec succès !';
+        alert('Cours ajouté avec succès !'),
         this.getCours();
       },
       error: () => {
-        this.message = 'Erreur lors de l’ajout du cours.';
+        alert('Erreur lors de l\’ajout du cours.')
       }
     });
   }
@@ -173,4 +212,63 @@ import { DbSidebarEtuComponent } from '../db-sidebar-etu/db-sidebar-etu.componen
       );
     });
   }
+  
+  
+  loadUserEvaluations(): void {
+    this.http.get<any[]>(`http://localhost:8081/api/evaluations/user/${this.user.id}`)
+      .subscribe(evals => {
+        evals.forEach(e => {
+          if (e.note == 1) {
+            this.likedCourses[e.cours.id] = true;
+          }
+        });
+      });
+  }
+
+courses: any[] = [];
+
+  loadAllLikesCounts(): void {
+  this.courses.forEach((c: any) => this.loadLikesCount(c.id));
+}
+
+  loadLikesCount(coursId: number): void {
+    this.http.get<number>(`http://localhost:8081/api/evaluations/likes/${coursId}`)
+      .subscribe(count => this.likesCount[coursId] = count);
+  }
+
+  toggleLike(coursId: number): void {
+    const isLiked = this.likedCourses[coursId];
+
+    if (!isLiked) {
+      // Like : POST
+      const params = new HttpParams()
+        .set('coursId', coursId)
+        .set('userId', this.user.id)
+        .set('note', '1');
+
+      this.http.post('http://localhost:8081/api/evaluations/add', {}, {
+         params, 
+          responseType:'text'
+        })
+        .subscribe(() => {
+          this.likedCourses[coursId] = true;
+          this.loadLikesCount(coursId);
+        });
+
+    } else {
+      // Unlike : DELETE
+      const params = new HttpParams()
+        .set('coursId', coursId)
+        .set('userId', this.user.id);
+
+      this.http.delete('http://localhost:8081/api/evaluations/delete', { 
+        params,
+        responseType:'text'
+       })
+        .subscribe(() => {
+          this.likedCourses[coursId] = false;
+          this.loadLikesCount(coursId);
+        });
     }
+  }
+  }

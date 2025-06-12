@@ -3,15 +3,13 @@
  <div class="main-content">
   <nav class="navbar">
  
-    
     <h3>Tableau de bord</h3>
+   
     <div class="icon">
-      <a routerLink="/"><mat-icon class="noti">mail</mat-icon></a>
-&nbsp;&nbsp;&nbsp;
       <a routerLink="/notification"><mat-icon>notifications</mat-icon></a>
     </div>   
-      <a routerLink="/profile"><img src="/assets/user-profile.jpg" alt="user" width="40"></a>
-    
+      <a routerLink="/profile"><img [src]="profilePhotoUrl" alt="user" width="35"></a>
+   
   </nav>
 
 </div>

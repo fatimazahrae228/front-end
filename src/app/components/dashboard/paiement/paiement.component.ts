@@ -21,10 +21,22 @@ export class PaiementComponent {
   };
 
   message = '';
+cours= {
+  note:0
 
+};
   validerPaiement() {
     // Logique réelle à connecter à une API ou service de paiement
     console.log('Paiement en cours :', this.paiement);
     this.message = 'Paiement effectué avec succès !';
   }
+  hoverStar: number = 0;
+
+noterCours(cours: any, note: number): void {
+  cours.note = note;
+  console.log(`Cours noté : ${cours.titre}, Note : ${note}`);
+
+  // Optionnel : envoyer la note au serveur
+  // this.http.post('/api/notes', { id: cours.id, note }).subscribe();
+}
 }

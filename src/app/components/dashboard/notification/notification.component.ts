@@ -15,30 +15,28 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './notification.component.css'
 })
 export class NotificationComponent implements OnInit {
-  notifications: any[] = [];
+ notifications: any[] = [];
 
-  
+constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {}
+ngOnInit(): void {
+  this.loadNotifications();
+}
 
-  ngOnInit(): void {
-    this.loadNotifications();
-  }
-
-  loadNotifications() {
-    this.http.get<any[]>('http://localhost:8081/api/notifications')
-      .subscribe(data => {
-        this.notifications = data.reverse().map(notif => {
-          return {
-            ...notif,
-            dateCreated: this.formatDate(notif.dateCreated)
-          };
-        });
+loadNotifications() {
+  this.http.get<any[]>('http://localhost:8081/api/notifications')
+    .subscribe(data => {
+      this.notifications = data.reverse().map(notif => {
+        return {
+          ...notif,
+          dateCreated: this.formatDate(notif.dateCreated)
+        };
       });
-  }
+    });
+}
 
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleString(); 
-  }
+formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleString();  // Formater la date de manière lisible
+}
 }

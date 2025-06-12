@@ -5,7 +5,6 @@ body {
   height :auto;
   margin: 0;
   padding: 0;
-  margin-left: 70px;
   margin-top: 74px;
   padding-top: 10px;
 }
@@ -41,15 +40,23 @@ label {
   margin-top: 10px;
 }
 
-input, textarea {
+input {
 outline: none;
   width: 100%;
   padding: 8px;
   font-size: 14px;
   border-radius: 5px;
   border: 1px solid #ddd;
- 
+  text-align: center;
 }
+ textarea{
+outline: none;
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  }
 
 input[type="datetime-local"], input[type="number"] {
   padding-left: 10px;
@@ -123,26 +130,32 @@ h3{
   text-align: center;
   font-weight: bold;
   font-size: 35px;
-  color: rgb(163, 87, 214);
-  margin-bottom: 25px;
+  color: #4a148c;
+ border-bottom: 3px solid #ba68c8 ;
+width: 600px;
+  padding-bottom: 12px;
+  margin: auto;
+  margin-bottom: 40px;
 }
+
 
 /* Liste des plannings */
 ul {
   list-style-type: none;
-  margin-left:80px;
-  width: 82%;
+  width: 85%;
+
 }
 
 li {
   color: #4a148c;;
   background-color: #fff;
-  border-left: 4.5px solid  #ba68c8;
-  padding: 15px 20px;
+  border-top: 5.5px solid  #ba68c8;
+ padding: 15px;
+ padding-right: 70px;
   margin-bottom: 13px;
   border-radius: 6px;
   position: relative;
-  transition: transform 0.2s ease;
+   box-shadow: 4px 4px 10px 2px rgba(103, 24, 168, 0.25);
 }
 li p{
   color: #3d393f8a;
@@ -156,20 +169,25 @@ li button{
   border: none;
   display: inline;
   position: absolute;
-  right: 20px;
+  right: 16px;
   top: 20px;
- width: 4%;
+ width:10%;
 }
 mat-icon{
-  font-size: 23px;
- padding-top: 2px;
+  font-size: 20px;
+ padding-top: 4px;
+ padding-right: 2px;
   
 }
 strong{
   font-size: 25px;
 }
-.success-message {
-  margin-top: 10px;
-  color: green;
-  font-weight: bold;
+.plan{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 éléments par ligne */
+  gap: 50px;
+ justify-content: center;
+ align-items: center;
+ margin: auto;
+
 }

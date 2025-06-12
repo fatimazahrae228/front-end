@@ -1,7 +1,8 @@
 body{
   background-color: whitesmoke;
   width: auto;
-  padding-top: 100px;
+  padding-top: 5px;
+  margin-top: 75px;
 }
   .stat-card-container {
     display: flex;
@@ -11,7 +12,7 @@ body{
   
   .stat-card {
     width: 200px;
-    height: 20vh;
+    height: 22vh;
     background: linear-gradient(135deg, #ff4081, #7c4dff); /* Gradient color */
     border-radius: 15px;
     padding: 20px;
@@ -52,3 +53,18 @@ body{
   h1{
     margin-left: 450px;
   }
+
+
+    .container{
+   text-decoration: underline;
+    color:#891eb3fd;
+    border-radius: 10px;
+    padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  width: 50%;
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  }
+  

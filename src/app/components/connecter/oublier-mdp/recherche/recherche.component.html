@@ -26,18 +26,16 @@
             <input type="text" maxlength="1" class="input-code" (input)="moveToNext($event, 6)">
         </div>
 
-        <div class="info">
-            Nous avons envoyé votre code à : 
-        </div>
+        
 
-        <a href="#" class="code-link">Code non reçu ?</a>
-
+<button type="button" class="code-link" (click)="resendCode()">Code non reçu ?</button>
         <div class="buttons">
             <button class="btn cancel" routerLink="/connecter">Annuler</button>
-            <button class="btn confirm">Continuer</button>
+           <button class="btn confirm" (click)="verifyCode()">Continuer</button>
         </div>
     </div>
 </div>
+
 
 </body>
 </html>

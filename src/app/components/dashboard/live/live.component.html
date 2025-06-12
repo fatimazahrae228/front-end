@@ -2,15 +2,32 @@
   <app-db-sidebar-for></app-db-sidebar-for>
   <body>
   
-  
+   <button  (click)="openModal()" id="rappel">Rappel</button>
+
+    <div class="modal-backdrop" *ngIf="showModal">
+    <div class="modal-content">
+      <div class="container">
+     <h2>RAPPEL</h2>
+<form (ngSubmit)="submitRappel()">
+    <input type="text" [(ngModel)]="rappel.titre" name="titre" placeholder="Tappez le titre du live" required/>
+  <input type="text"  [(ngModel)]="rappel.lienLive" placeholder="Tappez le lien du live"  name="lienLive" required/> 
+  <label>La diffusion en direct commencera dans (minutes)</label>
+  <input type="number" [(ngModel)]="rappel.duree" name="duree" required/>
+
+  <div class="button-row">
+<button type="submit">Envoyer</button>
+  <button type="reset" (click)="closeModal()">Annuler</button></div>
+</form></div>
+</div>
+</div>
+
   
   <div id="jaas-container" style="width: 100%; height: 600px;">
   
   <script type="text/javascript">
-    // 1. Définir le domaine utilisé pour Jitsi
-    const domain = "8x8.vc"; // Ou "meet.jit.si" si tu n'utilises pas JAAS
-  
-    // 2. Définir le nom de la salle et de l'utilisateur
+
+    const domain = "8x8.vc"; 
+
     const roomName = 'maSalleDeConference';  // Le nom de la salle
     const userName = "Nom de l'utilisateur"; // Le nom de l'utilisateur
   

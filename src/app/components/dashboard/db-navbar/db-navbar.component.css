@@ -7,6 +7,7 @@ body{
  background-color: whitesmoke;
 }
 .navbar {
+    position: absolute;
   top: 0;
   left: 0;
   width: calc(100% - 96px);
@@ -42,19 +43,14 @@ nav a mat-icon {
   margin-left: 890px;
 }
 
-div{
-  margin-left: 50px;
-}
+
 .photo-profil {
+
   width: 100px;
   height: 100px;
   border-radius: 50%;
   cursor: pointer;
+
 }
 
-.changer-photo-barre {
-  margin-top: 10px;
-  background: #f1f1f1;
-  padding: 10px;
-  border-radius: 8px;
-}
+

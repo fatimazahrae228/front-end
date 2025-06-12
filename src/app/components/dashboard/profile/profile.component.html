@@ -5,8 +5,7 @@
 <body>
 <div class="container">
     <div class="photo">
-    <img 
-      [src]="photoPreview ? photoPreview : user.photoUrl" alt="Photo de profil" />
+<img [src]=" photoPreview ? photoPreview :  profilePhotoUrl" alt="Photo de profil">
     </div>
     <!-- Bouton de sélection de photo -->
   <div *ngIf="!photoPreview" class="modification">
@@ -21,23 +20,30 @@
       <button (click)="annulerPhoto()">Annuler</button>
     </div>
     <hr>
-    <div *ngIf="user">
-    <p><strong>Nom:</strong> {{ user.nom }}</p>
-<p><strong>Prénom:</strong> {{ user.prenom }}</p>
-<p><strong>Role:</strong> {{ user.etat }}</p>
-<p><strong>Numéro de téléphone:</strong> {{ user.numTelephone }}</p>
-<p><strong>Email:</strong> {{ user.email }}</p>
+    <div *ngIf="user" class="info">
+    <p><strong>Nom :</strong> {{ user.nom }}</p>
+<p><strong>Prénom :</strong> {{ user.prenom }}</p>
+<p><strong>Role :</strong> {{ user.etat }}</p>
+<p><strong>Numéro de téléphone :</strong> {{ user.numTelephone }}</p>
+<p><strong>Email :</strong> {{ user.email }}</p>
     </div>
-    <button class="passwd" (click)="showPasswordForm = true">Modifier le mot de passe</button>
+    <hr/> <form *ngIf="show"><button class="passwd" (click)="showPasswordForm = true" (click)="startPasswordReset()" >Modifier le mot de passe</button></form>
 
-    <form *ngIf="showPasswordForm" (ngSubmit)="updatePassword()">
+    <form *ngIf="showPasswordForm">
+      
       <div class="input">
-        <input type="password" [(ngModel)]="oldPassword" name="oldPassword" placeholder="Ancien mot de passe" required>
-        <input type="password" [(ngModel)]="newPassword" name="newPassword" placeholder="Nouveau mot de passe" required>
-      </div>
-      <button type="submit" class="valider">Valider</button>
+        <input type="text" [(ngModel)]="codeDigits" name="code" placeholder="Code de vérification" required>
+      <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="newPassword" name="newPassword" placeholder="Nouveau mot de passe">
+  <button type="button" (click)="toggleShowPassword()" class="visibility"><mat-icon>visibility</mat-icon></button>
+
+  <input [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirmer mot de passe">
+  <button type="button" (click)="toggleShowConfirmPassword()" class="visibility"><mat-icon>visibility</mat-icon></button></div>
+  <button (click)="resetPassword()" class="env">Envoyer</button>
+ 
     </form>
-
-
 </div>
+
+  
+
+
 </body>

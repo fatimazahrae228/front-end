@@ -2,21 +2,57 @@
 <app-db-sidebar-etu>*ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
 <app-db-sidebar>*ngIf="user.etat == 'admin'"></app-db-sidebar>
 <body>
-<div class="notification-container">
-  <h2 class="notification-header">📬 LA BOÎTE DE NOTIFICATION</h2>
-  
-  <div *ngFor="let notif of notifications" class="notification-card">
-    <div class="notif-title"><mat-icon>notifications</mat-icon> {{ notif.planning.title }}</div>
-    <div class="notif-info"><mat-icon>calendar_month</mat-icon><strong>Date & Heure :</strong> {{ notif.planning.datetime }}</div>
-    <div class="notif-info"><mat-icon>timer</mat-icon><strong>Durée :</strong> {{ notif.planning.duration }} heure(s)</div>
-    <div class="notif-info"><mat-icon>description</mat-icon><strong>Description :</strong> {{ notif.planning.description }}</div>
-    <div class="notif-info"><mat-icon>person</mat-icon><strong>Formateur :</strong> {{ notif.planning.formateur.prenom }} {{ notif.planning.formateur.nom }}</div>
-    <div class="notif-date"><mat-icon>calendar_today</mat-icon>Créée le : {{ notif.dateCreated }}</div>
-  </div>
-  
-  <div *ngIf="notifications.length == 0" class="no-notifications">
-    <i class="mat-icon">info</i>
-    <p>Aucune notification pour le moment.</p>
-  </div>
+  <div class="notification-container">
+    <h2 class="notification-header">LA BOÎTE DE NOTIFICATION</h2>
+
+    <!-- Affichage des notifications -->
+    <ng-container *ngFor="let notif of notifications">
+
+      <!-- Notification de type planning -->
+      <div *ngIf="notif.planning" class="notification-card">
+        <h4><mat-icon>event_available</mat-icon>Planification :</h4>
+        <div class="notif-title">
+          <mat-icon>title</mat-icon><strong>Titre :</strong> {{ notif.planning.title }}
+        </div>
+        <div class="notif-info">
+          <mat-icon>calendar_month</mat-icon><strong>Date & Heure :</strong> {{ notif.planning.datetime }}
+        </div>
+        <div class="notif-info">
+          <mat-icon>timer</mat-icon><strong>Durée :</strong> {{ notif.planning.duration }} heure(s)
+        </div>
+        <div class="notif-info">
+          <mat-icon>description</mat-icon><strong>Description :</strong> {{ notif.planning.description }}
+        </div>
+        <div class="notif-info">
+          <mat-icon>person</mat-icon><strong>Formateur :</strong>
+          {{ notif.planning.formateur.prenom }} {{ notif.planning.formateur.nom }}
+        </div>
+        <div class="notif-date">
+          <mat-icon>calendar_today</mat-icon>Créée le : {{ notif.dateCreated }}
+        </div>
+      </div>
+
+      <!-- Notification de type rappel -->
+      <div *ngIf="notif.rappel" class="notification-card1">
+        <div class="notif-title">
+          <h4><mat-icon>call</mat-icon>Rappel :</h4>
+        </div>
+        <div class="notif-info">
+            <p>Live « <strong> {{ notif.rappel.titre }} </strong> » avec le formateur <strong>{{ notif.rappel.formateur.nom}} {{ notif.rappel.formateur.prenom }} </strong>commencera dans <strong> {{ notif.rappel.duree }} </strong> minutes.
+            <br> Cliquez sur <a [attr.href]="notif.rappel.lienLive" target="_blank"><span>ce lien</span></a> pour rejoindre le live.</p>
 </div>
+
+  <div class="notif-date">
+          <mat-icon>calendar_today</mat-icon>Créée le : {{ notif.dateCreated }}
+        </div>
+      </div>
+
+       
+    </ng-container>
+    <!-- Aucune notification -->
+    <div *ngIf="notifications.length == 0" class="no-notifications">
+      <mat-icon>info</mat-icon>
+      <p>Aucune notification pour le moment.</p>
+    </div>
+  </div>
 </body>

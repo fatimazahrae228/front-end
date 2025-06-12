@@ -38,12 +38,11 @@
          <h1 *ngIf="!isResultLoaded">Chargement.................</h1>
          
         <tr>
-            <th>ID</th>
+            
             <th>Nom</th>
             <th>Prénom</th>
             <th>Numéro de téléphone</th>
             <th>Email</th>
-            <th>Mots de passe</th>
             <th>Option</th>
           </tr>
         
@@ -52,12 +51,11 @@
         <tbody>
             <tr *ngFor="let formateur of formateurArray">
  
-            <th>{{formateur.id  }}</th>
+            
             <td>{{formateur.nom  | uppercase}}</td>
             <td>{{formateur.prenom }}</td>
             <td>{{formateur.numTelephone }}</td>
             <td>{{formateur.email }}</td>
-            <td>{{formateur.motsPasse }}</td>
             <td>
               <button type="button"  (click)="setUpdate(formateur)"><mat-icon>edit</mat-icon></button>
               

@@ -11,7 +11,7 @@ import { DbNavbarComponent } from '../db-navbar/db-navbar.component';
 declare var JitsiMeetExternalAPI: any;
 @Component({
   selector: 'app-planning',
-  imports: [ CommonModule , FormsModule , DbSidebarForComponent , DbNavbarComponent, MatIconModule] ,
+  imports: [ CommonModule , FormsModule , DbSidebarForComponent , DbNavbarComponent, MatIconModule ] ,
   templateUrl: './planning.component.html',
   styleUrl: './planning.component.css'
 })
@@ -88,10 +88,10 @@ export class PlanningComponent implements OnInit {
 
     this.http.post('http://localhost:8081/api/plannings', body).subscribe({
       next: () => {
-        this.message = 'Live planifié avec succès !';
+        alert('Live planifié avec succès !');
         this.getPlannings(); // Recharge les planifications après ajout
       },
-      error: () => this.message = 'Erreur lors de la planification.'
+      error: () => alert('Erreur lors de la planification.') ,
     });
   }
 
@@ -108,11 +108,11 @@ export class PlanningComponent implements OnInit {
         next: () => {
           // Supprimer localement la planification supprimée
           this.plannings = this.plannings.filter(p => p.id != planningId);
-          this.message = '';
+          alert('Planification supprimée avec succès.')
      
         },
         error: () => {
-          this.message = 'Planification supprimée avec succès.';
+         alert('Erreur de supprimée la planification')
         },
         
        

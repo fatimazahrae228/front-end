@@ -32,10 +32,8 @@
 
 <div *ngIf="plannings.length > 0">
   <h3>MES PLANIFICATIONS</h3>
-  <ul>
-    <div *ngIf="message" class="success-message">
-      {{ message }}
-    </div>
+
+      <ul class="plan">
     <li *ngFor="let planning of plannings">
       <strong>{{ planning.title }}</strong> - {{ planning.datetime }} - {{ planning.duration }}h
       <p>{{ planning.description }}</p>

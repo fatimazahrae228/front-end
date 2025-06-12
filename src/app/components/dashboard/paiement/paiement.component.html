@@ -28,3 +28,17 @@
 
   <button class="payment-button">Payer</button>
 </div>
+
+
+
+<div class="star-rating">
+  <span *ngFor="let star of [1,2,3,4,5]"
+        (click)="noterCours(cours, star)"
+        (mouseenter)="hoverStar = star"
+        (mouseleave)="hoverStar = 0"
+        [ngClass]="{
+          'filled': star <= (hoverStar || cours.note)
+        }">
+    ★
+  </span>
+</div>

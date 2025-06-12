@@ -21,6 +21,7 @@ import { ProfileComponent } from './components/dashboard/profile/profile.compone
 import { DbSidebarEtuComponent } from './components/dashboard/db-sidebar-etu/db-sidebar-etu.component';
 import { LiveComponent } from './components/dashboard/live/live.component';
 import { NotificationComponent } from './components/dashboard/notification/notification.component';
+import { ResetPasswordComponent } from './components/connecter/oublier-mdp/reset-password/reset-password.component';
 
 export const routes: Routes = [
     { 
@@ -51,6 +52,10 @@ export const routes: Routes = [
      {
       path : 'oublier-mdp',
       component : OublierMdpComponent } ,
+
+        {
+      path : 'reset-password',
+      component : ResetPasswordComponent } ,
       {
           path : 'db-sidebar',
           component : DbSidebarComponent

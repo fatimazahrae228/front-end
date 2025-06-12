@@ -71,12 +71,50 @@
 
 <!-- Liste des cours -->
 <ul>
-  <li *ngFor="let cours of coursFiltresAppliques">
-    <strong>{{ cours.titre }}</strong> - {{ cours.filiere }} / {{ cours.niveau }} / {{ cours.type }}
-    <div class="ad">
-      <button (click)="ouvrirPdf(cours.pdfUrlView)"><mat-icon>visibility</mat-icon></button>
-      <button (click)="telechargerPdf(cours.pdfUrlDownload)"><mat-icon>download</mat-icon></button>
+ <li *ngFor="let cours of coursFiltresAppliques" class="cours-item">
+  <div class="info-container">
+    <div class="cours-info">
+      <strong>{{ cours.titre }} </strong> - {{ cours.filiere }} / {{ cours.niveau }} / {{ cours.type }}
     </div>
-  </li>
+ 
+
+<div class="actions">
+<div class="like">
+<mat-icon
+  (click)="toggleLike(cours.id)"
+  [ngStyle]="{
+    'color': likedCourses[cours.id] ? 'red' : 'gray',
+    'font-size': '32px',
+    'cursor': 'pointer',
+  }"
+>
+thumb_up
+</mat-icon>
+ 
+
+<span>{{ likesCount[cours.id] || 0 }}</span>
+</div>
+ 
+ 
+
+      <div class="ad">
+        <button (click)="ouvrirPdf(cours.pdfUrlView)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button (click)="telechargerPdf(cours.pdfUrlDownload)">
+          <mat-icon>download</mat-icon>
+        </button>
+     </div> 
+  </div>
+  </div>
+<div class="file-type-tag" [ngClass]="cours.fileType">
+    <span id="fileType">{{ cours.fileType.toUpperCase() }}</span>
+  </div>
+
+</li>
 </ul>
+
+
+
+ 
 </body>
