@@ -1,44 +1,74 @@
-<div class="payment-container">
-  <h2>Paiement du cours</h2>
+<app-db-navbar></app-db-navbar>
 
-  <div class="payment-field">
-    <label for="nom">Nom sur la carte</label>
-    <input type="text" id="nom" placeholder="Jean Dupont" />
+<app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for>
+<app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
+<app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
+
+<div class="search-container">
+  <h1>Rechercher par titre</h1>
+  
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [(ngModel)]="rechercheCours.titre" 
+      placeholder="Rechercher par titre"
+    >
+
+    <select [(ngModel)]="rechercheCours.filiere">
+      <option value="">Toutes les filières</option>
+      <option>SMA</option>
+      <option>SMI</option>
+      <option>SMP</option>
+      <option>SMC</option>
+      <option>SVI</option>
+      <option>STU</option>
+    </select>
+
+    <select [(ngModel)]="rechercheCours.niveau">
+      <option value="">Tous les niveaux</option>
+      <option>S1</option>
+      <option>S2</option>
+      <option>S3</option>
+      <option>S4</option>
+      <option>S5</option>
+      <option>S6</option>
+    </select>
+
+   
+    <select [(ngModel)]="rechercheCours.documentType">
+      <option value="">Tous les types de document</option>
+      <option>Cours</option>
+      <option>TD</option>
+      <option>Examen</option>
+    </select>
+
+    <button (click)="appliquerFiltre()">
+      <mat-icon>search</mat-icon>
+    </button>
   </div>
-
-  <div class="payment-field">
-    <label for="numero">Numéro de carte</label>
-    <input type="text" id="numero" placeholder="1234 5678 9012 3456" />
-  </div>
-
-  <div class="payment-field">
-    <label for="expiration">Date d’expiration</label>
-    <input type="text" id="expiration" placeholder="MM/AA" />
-  </div>
-
-  <div class="payment-field">
-    <label for="cvv">CVV</label>
-    <input type="text" id="cvv" placeholder="123" />
-  </div>
-
-  <div class="payment-summary">
-    <p>Cours : Mathématiques S5</p>
-    <p>Prix : <strong>99.00 DH</strong></p>
-  </div>
-
-  <button class="payment-button">Payer</button>
 </div>
 
+<div *ngFor="let cours of coursFiltresAppliques" class="course-item">
+  <div class="course-info">
+    <h3>{{ cours.titre }}</h3>
+    <p>{{ cours.filiere }}/{{ cours.niveau }} - {{ cours.type }}</p>
+    <p *ngIf="cours.type === 'Payant'">Prix: {{ convertDhToUsd(cours.prix) }}</p>
+  </div>
 
-
-<div class="star-rating">
-  <span *ngFor="let star of [1,2,3,4,5]"
-        (click)="noterCours(cours, star)"
-        (mouseenter)="hoverStar = star"
-        (mouseleave)="hoverStar = 0"
-        [ngClass]="{
-          'filled': star <= (hoverStar || cours.note)
-        }">
-    ★
-  </span>
+  <div *ngIf="cours.type === 'Payant'" class="payment-section">
+    <div *ngIf="!cours.isPaid">
+      <button (click)="initierPaiement(cours)" [disabled]="paymentProcessing" class="pay-button">
+        {{ paymentProcessing && selectedCourseId === cours.id ? 'Traitement...' : 'Payer' }}
+      </button>
+      <div [id]="'paypal-button-' + cours.id" class="paypal-container"></div>
+    </div>
+    <div *ngIf="cours.isPaid" class="access-buttons">
+      <button (click)="ouvrirPdf(cours.pdfUrlView)" class="access-button">
+        Voir le cours
+      </button>
+      <button (click)="telechargerPdf(cours.pdfUrlDownload)" class="download-button">
+        Télécharger
+      </button>
+    </div>
+  </div>
 </div>

@@ -1,19 +1,23 @@
-<app-db-navbar></app-db-navbar>
+<!-- Modal d'ajout -->
+ <app-db-navbar></app-db-navbar>
 <app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for> 
 <app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
 <app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
 <body>
-<!-- Modal d'ajout -->
+  
+
 <div class="btn">
-  <button (click)="openModal()"  *ngIf="user.etat && (user.etat == 'formateur' || user.etat == 'admin')">Ajouter un cours</button>
+  <button (click)="openModal()" *ngIf="user.etat && (user.etat == 'formateur' || user.etat == 'admin')">
+    Ajouter un module d'enseignement
+  </button>
 </div>
 
 <div class="modal-backdrop" *ngIf="showModal">
   <div class="modal-content">
     <div class="container">
-      <h2>AJOUTER UN COURS</h2>
+      <h2>ajouter un module</h2>
       <form (ngSubmit)="submitCours()">
-        <label>Titre du cours :</label>
+        <label>Titre du module :</label>
         <input type="text" [(ngModel)]="nouveauCours.titre" name="titre" required>
 
         <label>Filière :</label>
@@ -29,8 +33,19 @@
         </select>
 
         <label>Type :</label>
-        <select [(ngModel)]="nouveauCours.type" name="type">
-          <option>Gratuit</option><option>Payant</option>
+<select [(ngModel)]="nouveauCours.type" name="type" (change)="onTypeChange()">
+  <option>Gratuit</option>
+  <option>Payant</option>
+</select>
+
+<div *ngIf="nouveauCours.type === 'Payant'">
+  <label>Prix (DH) :</label>
+  <input type="number" [(ngModel)]="nouveauCours.prix" name="prix" min="0">
+</div>
+
+        <label>Type de document :</label>
+        <select [(ngModel)]="nouveauCours.documentType" name="documentType">
+          <option>Cours</option><option>TD</option><option>Examen</option>
         </select>
 
         <label>Fichier PDF :</label>
@@ -49,6 +64,7 @@
 <!-- Barre de recherche -->
 <div class="search-bar">
   <input type="text" [(ngModel)]="rechercheCours.titre" placeholder="Rechercher par titre">
+
   <select [(ngModel)]="rechercheCours.filiere">
     <option value="">Toutes les filières</option>
     <option>SMA</option><option>SMI</option><option>SMP</option>
@@ -66,16 +82,55 @@
     <option>Gratuit</option><option>Payant</option>
   </select>
 
+  <select [(ngModel)]="rechercheCours.documentType">
+    <option value="">Tous les types de document</option>
+    <option>Cours</option><option>TD</option><option>Examen</option>
+  </select>
+
   <button (click)="appliquerFiltre()"><mat-icon>search</mat-icon></button>
 </div>
 
-<!-- Liste des cours -->
 <ul>
- <li *ngFor="let cours of coursFiltresAppliques" class="cours-item">
+<li *ngFor="let cours of coursFiltresAppliques" class="cours-item">
   <div class="info-container">
     <div class="cours-info">
-      <strong>{{ cours.titre }} </strong> - {{ cours.filiere }} / {{ cours.niveau }} / {{ cours.type }}
+      <!-- Format: [Titre] - [Filière]/[Niveau]/ [Type] ([Prix]) [DocumentType] -->
+      <strong>{{ cours.titre }}</strong> - {{ cours.filiere }}/{{ cours.niveau }}/ 
+      {{ cours.type }} <span *ngIf="cours.type === 'Payant'">({{ cours.prix }} DH)</span> {{ cours.documentType }}
     </div>
+
+    <div class="actions">
+      <!-- Bouton Payer conditionnel -->
+    <div class="actions">
+  <button *ngIf="cours.type === 'Payant' && !cours.paid" 
+        class="payer-button" 
+        (click)="redirectToPaiement()">
+  💳 Payer
+</button>
+
+</div>
+
+
+
+      <!-- Dans la boucle *ngFor pour chaque cours -->
+<div *ngIf="cours.type === 'Payant'">
+  <!-- Si non payé -->
+  <div *ngIf="!cours.paid" class="payment-section">
+    
+    <div class="payment-buttons">
+      
+      
+      <div #paypalContainer [id]="'paypal-container-'+cours.id" class="paypal-container"></div>
+    </div>
+  </div>
+  
+  <!-- Si payé -->
+  <div *ngIf="cours.paid" class="course-content">
+    <button (click)="ouvrirPdf(cours.pdfUrlView)" class="access-button">
+      Accéder au cours
+    </button>
+  </div>
+</div>
  
 
 <div class="actions">
@@ -97,24 +152,33 @@ thumb_up
  
  
 
-      <div class="ad">
-        <button (click)="ouvrirPdf(cours.pdfUrlView)">
-          <mat-icon>visibility</mat-icon>
-        </button>
-        <button (click)="telechargerPdf(cours.pdfUrlDownload)">
-          <mat-icon>download</mat-icon>
-        </button>
-     </div> 
+    <div class="ad">
+  <!-- Si le cours est gratuit OU déjà payé -->
+  <ng-container *ngIf="cours.type === 'Gratuit' || cours.paid">
+    <button (click)="ouvrirPdf(cours.pdfUrlView)">
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <button (click)="telechargerPdf(cours.pdfUrlDownload)">
+      <mat-icon>download</mat-icon>
+    </button>
+  </ng-container>
+
+  <!-- Si le cours est payant et non encore payé -->
+  <ng-container *ngIf="cours.type === 'Payant' && !cours.paid">
+    <button (click)="afficherAlerte()">
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <button (click)="afficherAlerte()">
+      <mat-icon>download</mat-icon>
+    </button>
+  </ng-container>
+</div>
+
   </div>
   </div>
 <div class="file-type-tag" [ngClass]="cours.fileType">
     <span id="fileType">{{ cours.fileType.toUpperCase() }}</span>
   </div>
 
-</li>
-</ul>
 
 
-
- 
-</body>

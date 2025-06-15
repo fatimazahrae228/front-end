@@ -56,6 +56,19 @@
           },
           "defaultConfiguration": "production"
         },
+        "projects": {
+  "your-app": {
+    "architect": {
+      "build": {
+        "options": {
+          "headers": {
+            "Content-Security-Policy": "script-src 'self' https://*.paypal.com 'unsafe-eval'; worker-src 'self' blob:; connect-src 'self' https://*.paypal.com"
+          }
+        }
+      }
+    }
+  }
+},
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
