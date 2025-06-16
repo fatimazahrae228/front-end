@@ -1,18 +1,11 @@
 <!-- Modal d'ajout -->
- <app-db-navbar></app-db-navbar>
-<app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for> 
-<app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
-<app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
+
 
 
 <body>
   
 
-<div class="btn" *ngIf="user.etat == 'formateur' || user.etat == 'admin'">
-  <button (click)="openModal()" >Ajouter un module d'enseignement</button>
-  <button (click)="openModal()" >Supprimer un module d'enseignement</button>
 
-</div>
 
 
 <div class="modal-backdrop" *ngIf="showModal">
@@ -107,9 +100,16 @@
     <div class="actions">
   <button *ngIf="cours.type === 'Payant' && !cours.paid" 
         class="payer-button" 
-        (click)="redirectToPaiement()">
+        (click)="openModal()">
   💳 Payer
 </button>
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-content">
+    <div class=container>
+    <p>Veuillez vous inscrire pour effectuer le paiement</p>
+   <a href="/inscrire">Inscrire</a>
+  </div></div></div>
+
 
 </div>
 
@@ -161,10 +161,7 @@ thumb_up
   <button (click)="ouvrirPdf(cours.pdfUrlView)">
     <mat-icon>visibility</mat-icon>
   </button>
-  <button (click)="telechargerPdf(cours.pdfUrlDownload)">
-    <mat-icon>download</mat-icon>
-  </button>
- 
+  
 </ng-container>
 
 
@@ -173,12 +170,8 @@ thumb_up
     <button (click)="afficherAlerte()">
       <mat-icon>visibility</mat-icon>
     </button>
-    <button (click)="afficherAlerte()">
-      <mat-icon>download</mat-icon>
-    </button>
-    <button (click)="supprimerCours(cours.coursId)">Supprimer
-  <mat-icon>delete</mat-icon>
-</button>
+   
+ 
 
   </ng-container>
 </div>

@@ -29,7 +29,7 @@
                 <img src="assets/Cours.png" alt="cours">
               <i class="fa-solid fa-chart-line"></i>
             </div>
-            <a href="/cours" class="link">
+            <a href="/cours1" class="link">
             <h3>COURS EN LIGNE</h3>
             <p>
                 Accédez à une bibliothèque de cours gratuits et payants créés par des étudiants pour des étudiants ! Apprenez à votre rythme grâce à des vidéos, des documents PDF et des exercices interactifs.
@@ -44,14 +44,20 @@
                 <img src="assets/QCM.png" alt="QCM">
               <i class="fa-solid fa-arrows-down-to-people"></i>
             </div>
-            <h3>QCM ET QUIZ</h3>
+            <a href="/cours1" class="link">
+            <h3>TD/TP & EXAMEN  </h3>
+            
             <p>
-             Testez vos connaissances avec des quiz interactifs et des défis chronométrés. Apprenez en vous amusant et challengez vos amis.
+             Voir et télécharger les TD, TP ainsi que les examens publiés par les formateurs.
             </p>
+            </a>
+            
           </div>
         </div>
 
-        <div class="col">
+        <div class="col" (click)="openModal()">
+          <div class="modal-content">
+    </div>
           <div class="service-card">
             <div class="icon-wrapper">
                 <img src="assets/live.png" alt="live">
@@ -59,37 +65,22 @@
             </div>
             <h3>LIVE INTERACTIFS</h3>
             <p>
-                Participez à des sessions en direct animées par des tuteurs. Posez vos questions en temps réel via le chat, téléchargez les PDF partagés et interagissez avec le formateur. Un moyen immersif et dynamique d’apprendre !
+  
+                Participez à des sessions en direct animées par des formateurs. Posez vos questions en temps réel via le chat, téléchargez les PDF partagés et interagissez avec le formateur. Un moyen immersif et dynamique d’apprendre !
             </p>
+            <div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-content">
+    <div class=container1>
+    <span>Veuillez vous vous inscrire</span>
+    <br> <br>
+   <a href="/inscrire">S'inscrire</a>
+  </div></div></div>
           </div>
         </div>
 
-        <div class="col">
-          <div class="service-card">
-            <div class="icon-wrapper">
-               <img src="assets/tutorat.png" alt="tutorat">
-              <i class="fa-solid fa-money-check-dollar"></i>
-            </div>
-            <h3>SYSTEME DE TUTORAT</h3>
-            <p>
-                Besoin d’un accompagnement personnalisé ? Trouvez un tuteur disponible pour vous aider sur une matière spécifique. Réservez une session privée et progressez efficacement avec un mentor étudiant !
-            </p>
-          </div>
-        </div>
-        <div class="col">
-          <div class="service-card">
-            <div class="icon-wrapper">
-                <img src="assets/forum.png" alt="forum d'entraide">
-              <i class="fa-regular fa-circle-check"></i>
-            </div>
-            <h3>FORUM D'ENTRAIDE</h3>
-            <p>
-                Posez vos questions et obtenez de l’aide de la communauté ! Les étudiants et tuteurs partagent leurs connaissances pour vous aider à réussir. Votez pour les meilleures réponses et rejoignez des discussions thématiques
-            </p>
-          </div>
-        </div>
-
-        <div class="col">
+        
+     
+<div class="col" (click)="openModal()">
           <div class="service-card">
             <div class="icon-wrapper">
                 <img src="assets/orientation.png" alt="orientation">
@@ -97,8 +88,15 @@
             </div>
             <h3>COACHING ET ORIENTATION</h3>
             <p>
-                Besoin de conseils pour votre parcours académique ou professionnel ? Nos tuteurs et mentors vous accompagnent dans votre orientation, vos méthodes d’apprentissage et vos projets futurs. Réservez un appel avec un coach et préparez votre avenir sereinement.
+                Besoin de conseils pour votre parcours académique ou professionnel ? Nos tuteurs et mentors vous accompagnent dans votre orientation, vos méthodes d’apprentissage et vos projets futurs. 
             </p>
+            <div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-content">
+    <div class=container1>
+    <span>Veuillez vous vous inscrire</span>
+    <br> <br>
+   <a href="/inscrire">S'inscrire</a>
+  </div></div></div>
           </div>
         </div>
       </div>

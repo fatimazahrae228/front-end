@@ -41,9 +41,10 @@ hr {
 }
 
 .sidebar .menu li {
-  padding: 13px;
+  padding: 10px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 19px;
+  margin-bottom: -3px;
 }
 
 .sidebar .menu a {

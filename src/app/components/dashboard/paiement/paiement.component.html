@@ -3,7 +3,7 @@
 <app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for>
 <app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
 <app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
-
+<body>
 <div class="search-container">
   <h1>Rechercher par titre</h1>
   
@@ -49,11 +49,14 @@
 </div>
 
 <div *ngFor="let cours of coursFiltresAppliques" class="course-item">
-  <div class="course-info">
-    <h3>{{ cours.titre }}</h3>
-    <p>{{ cours.filiere }}/{{ cours.niveau }} - {{ cours.type }}</p>
-    <p *ngIf="cours.type === 'Payant'">Prix: {{ convertDhToUsd(cours.prix) }}</p>
-  </div>
+  <div class="course-info" *ngIf="cours">
+  <h3>{{ cours?.titre }}</h3>
+  <p>{{ cours?.filiere }}/{{ cours?.niveau }} - {{ cours?.type }}</p>
+  <p *ngIf="cours?.type === 'Payant'">
+    Prix: {{ convertDhToUsd(cours?.prix) }}
+  </p>
+</div>
+
 
   <div *ngIf="cours.type === 'Payant'" class="payment-section">
     <div *ngIf="!cours.isPaid">
@@ -71,4 +74,4 @@
       </button>
     </div>
   </div>
-</div>
+</div></body>

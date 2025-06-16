@@ -78,23 +78,20 @@ declare const paypal: {
   };
 };
 @Component({
-  selector: 'app-cours',
+  selector: 'app-cours1',
   standalone: true,
   imports: [MatIcon, FormsModule, CommonModule , DbNavbarComponent, DbSidebarComponent, DbSidebarForComponent, DbSidebarEtuComponent],
-  templateUrl: './cours.component.html',
-  styleUrl: './cours.component.css'
+  templateUrl: './cours1.component.html',
+  styleUrl: './cours1.component.css'
 })
-export class CoursComponent implements OnInit {
+export class Cours1Component implements OnInit {
+ showModal = false;
+
+  
 
 
-  cours: any;
 
 
-redirectToPaiement() {
-  this.router.navigate(['/paiement'], { state: { cours: this.cours } });
-
-}
-  showModal = false;
    paypalButtonIds: { [key: number]: string } = {};
   user = {
     id: '',
@@ -133,8 +130,7 @@ redirectToPaiement() {
   coursFiltresAppliques: any[] = [];
   likedCourses: { [id: number]: boolean } = {};
   likesCount: { [id: number]: number } = {};
- 
-
+  userId: number | null = null;
   courses: any[] = [];
   private baseUrl = 'http://localhost:8081/api/evaluations';
 
@@ -428,9 +424,6 @@ private getFileType(filename: string): string {
   }
 
 
-  
-
-
 
   getPdfUrl(coursId: number, isDownload: boolean): string {
     const cours = this.listeCours.find(c => c.id === coursId);
@@ -451,7 +444,6 @@ appliquerFiltre() {
   });
 }
 
- 
   loadUserEvaluations(): void {
     this.http.get<any[]>(`http://localhost:8081/api/evaluations/user/${this.user.id}`)
       .subscribe(evals => {
@@ -463,11 +455,9 @@ appliquerFiltre() {
       });
   }
 
-
-
   loadAllLikesCounts(): void {
-  this.courses.forEach((c: any) => this.loadLikesCount(c.id));
-}
+    this.courses.forEach((c: any) => this.loadLikesCount(c.id));
+  }
 
   loadLikesCount(coursId: number): void {
     this.http.get<number>(`http://localhost:8081/api/evaluations/likes/${coursId}`)
@@ -478,35 +468,30 @@ appliquerFiltre() {
     const isLiked = this.likedCourses[coursId];
 
     if (!isLiked) {
-      // Like : POST
       const params = new HttpParams()
         .set('coursId', coursId)
         .set('userId', this.user.id)
         .set('note', '1');
 
       this.http.post('http://localhost:8081/api/evaluations/add', {}, {
-         params, 
-          responseType:'text'
-        })
-        .subscribe(() => {
-          this.likedCourses[coursId] = true;
-          this.loadLikesCount(coursId);
-        });
-
+        params,
+        responseType: 'text'
+      }).subscribe(() => {
+        this.likedCourses[coursId] = true;
+        this.loadLikesCount(coursId);
+      });
     } else {
-      // Unlike : DELETE
       const params = new HttpParams()
         .set('coursId', coursId)
         .set('userId', this.user.id);
 
-      this.http.delete('http://localhost:8081/api/evaluations/delete', { 
+      this.http.delete('http://localhost:8081/api/evaluations/delete', {
         params,
-        responseType:'text'
-       })
-        .subscribe(() => {
-          this.likedCourses[coursId] = false;
-          this.loadLikesCount(coursId);
-        });
+        responseType: 'text'
+      }).subscribe(() => {
+        this.likedCourses[coursId] = false;
+        this.loadLikesCount(coursId);
+      });
     }
   }
   // Ajoutez cette méthode pour filtrer par type de document
@@ -677,8 +662,6 @@ private convertDhToUsd(montantDh: number): string {
     }, 100);
   }
 
-
-  
   renderPaypalButton(cours: any) {
     const containerId = `paypal-button-${cours.id}`;
     const container = document.getElementById(containerId);

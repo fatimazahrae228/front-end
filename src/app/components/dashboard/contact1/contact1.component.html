@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<app-db-navbar></app-db-navbar>
+<app-db-sidebar-for *ngIf="user.etat=='formateur'"></app-db-sidebar-for>
+<app-db-sidebar-etu *ngIf="user.etat=='etudiant'"></app-db-sidebar-etu>
 
 <head>
     <meta charset="UTF-8">

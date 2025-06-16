@@ -1,0 +1,63 @@
+<app-db-navbar></app-db-navbar>
+
+<app-db-sidebar></app-db-sidebar>
+
+<body>
+  <!-- Bouton pour ouvrir la modale -->
+  <div class="btn">
+    <button (click)="openModal()">Ajouter une filière</button>
+  </div>
+
+  <!-- Modale -->
+  <div class="modal-backdrop" *ngIf="showModal">
+    <div class="modal-content">
+      <div style="text-align: center;">
+        <h3>REMPLIR CE FORMULAIRE</h3>
+      </div>
+      <form>
+        <label>Nom :</label>
+        <input type="text" [(ngModel)]="filiere.nom" [ngModelOptions]="{standalone: true}" class="form-control" id="name" placeholder="Entrez le nom de la filière">
+
+        <label>Description :</label>
+        <input type="text" [(ngModel)]="filiere.description" [ngModelOptions]="{standalone: true}" class="form-control" id="description" placeholder="Entrez la description de la filière">
+
+        <div class="modal-buttons">
+          <button type="button" (click)="save()">Envoyer</button>
+          <button type="button" (click)="closeModal()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="rect">
+    <h5>Table des filières disponibles</h5>
+    <table class="table-bordered">
+      <thead>
+        <h1 *ngIf="!isResultLoaded">Chargement.................</h1>
+        <tr>
+         
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let filiere of filiereArray">
+        
+          <td>{{ filiere.nom | uppercase }}</td>
+          <td>{{ filiere.description }}</td>
+          <td>
+            <button type="button" (click)="setUpdate(filiere)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button type="button" (click)="setDelete(filiere.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>

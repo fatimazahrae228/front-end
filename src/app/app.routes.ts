@@ -22,7 +22,9 @@ import { DbSidebarEtuComponent } from './components/dashboard/db-sidebar-etu/db-
 import { LiveComponent } from './components/dashboard/live/live.component';
 import { NotificationComponent } from './components/dashboard/notification/notification.component';
 import { ResetPasswordComponent } from './components/connecter/oublier-mdp/reset-password/reset-password.component';
-
+import { FilieresComponent } from './components/dashboard/filieres/filieres.component';
+import { Contact1Component } from './components/dashboard/contact1/contact1.component';
+import { Cours1Component } from './components/dashboard/cours1/cours1.component';
 export const routes: Routes = [
     { 
         path:'',
@@ -48,6 +50,12 @@ export const routes: Routes = [
      { 
      path : 'recherche',
      component : RechercheComponent  } ,
+       { 
+     path : 'contact1',
+     component : Contact1Component  } ,
+       { 
+     path : 'cours1',
+     component : Cours1Component} ,
      
      {
       path : 'oublier-mdp',
@@ -63,6 +71,10 @@ export const routes: Routes = [
      {
           path : 'notification',
           component : NotificationComponent
+     },
+       {
+          path : 'filieres',
+          component : FilieresComponent
      },
 
      {

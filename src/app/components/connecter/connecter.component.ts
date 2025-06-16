@@ -22,38 +22,51 @@ export class ConnecterComponent {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   public handleSubmit() {
-    console.log(this.data.value);
+  const { email, motspasse } = this.data.value;
 
-    this.httpClient.post('http://localhost:8081/users/login', this.data.value)
-      .subscribe((response: any) => {
-        console.log(response);
+  // تحقق محلي قبل الإرسال
+  if (email === 'fatimazahraeel28@gmail.com' && motspasse === '123456') {
+    alert("Connexion réussie en tant qu'admin");
 
-        if (response.success && response.role  && response.user) {
-          alert(`Connexion réussie en tant que ${response.role}`);
+    // Simuler utilisateur admin
+    const user = { email, nom: 'Fatima Zahrae', role: 'admin' };
 
-          // Enregistrer l'utilisateur dans le localStorage
-          localStorage.setItem('user', JSON.stringify(response.user));
+    // تخزين المستخدم في localStorage
+    localStorage.setItem('user', JSON.stringify(user));
 
-          // Redirection selon le rôle
-          switch (response.role) {
-            case 'admin':
-              this.router.navigate(['/db-admin']);
-              break;
-            case 'formateur':
-              this.router.navigate(['/db-formateur']);
-              break;
-            case 'etudiant':
-              this.router.navigate(['/db-etudiant']);
-              break;
-            default:
-              alert("Rôle inconnu !");
-          }
-        } else {
-          alert("Identifiants erronés. Veuillez réessayer.");
-        }
-      }, error => {
-        console.error("Erreur lors de la connexion:", error);
-        alert("Une erreur s'est produite. Vérifie ton backend.");
-      });
+    // إعادة التوجيه مباشرة لصفحة الادمن
+    this.router.navigate(['/db-admin']);
+    return; // نوقف هنا لأننا أرسلنا التوجيه محلياً
   }
+
+  // إذا ماكانش هو الحساب الخاص، نستعمل طلب الـ backend الطبيعي
+  this.httpClient.post('http://localhost:8081/users/login', this.data.value)
+    .subscribe((response: any) => {
+      if (response.success && response.role && response.user) {
+        alert(`Connexion réussie en tant que ${response.role}`);
+
+        localStorage.setItem('user', JSON.stringify(response.user));
+
+        switch (response.role) {
+          case 'admin':
+            this.router.navigate(['/db-admin']);
+            break;
+          case 'formateur':
+            this.router.navigate(['/db-formateur']);
+            break;
+          case 'etudiant':
+            this.router.navigate(['/db-etudiant']);
+            break;
+          default:
+            alert("Rôle inconnu !");
+        }
+      } else {
+        alert("Identifiants erronés. Veuillez réessayer.");
+      }
+    }, error => {
+      console.error("Erreur lors de la connexion:", error);
+      alert("Une erreur s'est produite. Vérifie ton backend.");
+    });
+}
+
 }

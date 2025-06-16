@@ -62,8 +62,13 @@ export class PaiementComponent implements OnInit {
     type: '',
     documentType: ''
   };
-
+  cours: any;
   constructor(private http: HttpClient) {}
+    ngOnInit1(): void {
+    this.cours = history.state.cours; // <=== wach katmchi b navigation state ?
+    console.log('cours:', this.cours);
+    console.log('prix:', this.cours?.prix);
+  }
 
   ngOnInit(): void {
     const data = localStorage.getItem('user');
@@ -224,7 +229,11 @@ ouvrirPdf(url: string | undefined) {
   window.open(url, '_blank');
 }
 public convertDhToUsd(montantDh: number | undefined): string {
-  if (montantDh === undefined) return 'N/A USD';
+  console.log('montantDh value:', montantDh);
+  
+console.log('Prix DH:', this.cours?.prix);
+
+  if (montantDh == undefined) return 'N/A USD';
   return (montantDh / 10).toFixed(2) + ' USD';
 }
 

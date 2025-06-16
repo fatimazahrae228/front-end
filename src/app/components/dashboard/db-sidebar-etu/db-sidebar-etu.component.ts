@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+
 import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-db-sidebar-etu',
-  imports: [ RouterLink, MatIconModule  ],
+  imports: [ RouterLink , MatIconModule],
   templateUrl: './db-sidebar-etu.component.html',
   styleUrl: './db-sidebar-etu.component.css'
 })
