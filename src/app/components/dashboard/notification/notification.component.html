@@ -1,6 +1,7 @@
 <app-db-navbar></app-db-navbar>
-<app-db-sidebar-etu>*ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
-<app-db-sidebar>*ngIf="user.etat == 'admin'"></app-db-sidebar>
+<app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
+<app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
+<app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for>
 <body>
   <div class="notification-container">
     <h2 class="notification-header">LA BOÎTE DE NOTIFICATION</h2>

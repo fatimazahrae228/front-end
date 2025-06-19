@@ -1,26 +1,20 @@
-<!-- Modal d'ajout -->
- <app-db-navbar></app-db-navbar>
+<app-db-navbar></app-db-navbar>
 <app-db-sidebar-for *ngIf="user.etat == 'formateur'"></app-db-sidebar-for> 
 <app-db-sidebar *ngIf="user.etat == 'admin'"></app-db-sidebar>
 <app-db-sidebar-etu *ngIf="user.etat == 'etudiant'"></app-db-sidebar-etu>
-
-
 <body>
-  
-
-<div class="btn" *ngIf="user.etat == 'formateur' || user.etat == 'admin'">
-  <button (click)="openModal()" >Ajouter un module d'enseignement</button>
-  <button (click)="openModal()" >Supprimer un module d'enseignement</button>
-
+<!-- Modal d'ajout -->
+<div class="btn">
+  <button (click)="openModal('add')"  *ngIf="user.etat && (user.etat == 'formateur' || user.etat == 'admin')">Ajouter un module d'enseignement</button>
+    <button (click)="openModal('delete')" class="sup" *ngIf="user.etat && (user.etat == 'formateur')">Supprimer mes modules</button>
 </div>
 
-
-<div class="modal-backdrop" *ngIf="showModal">
+<div class="modal-backdrop" *ngIf="showAddModal">
   <div class="modal-content">
     <div class="container">
-      <h2>Ajouter un module</h2>
+      <h2>AJOUTER UN MODULE</h2>
       <form (ngSubmit)="submitCours()">
-        <label>Titre du module :</label>
+        <label>Titre du cours :</label>
         <input type="text" [(ngModel)]="nouveauCours.titre" name="titre" required>
 
         <label>Filière :</label>
@@ -36,19 +30,18 @@
         </select>
 
         <label>Type :</label>
-<select [(ngModel)]="nouveauCours.type" name="type" (change)="onTypeChange()">
-  <option>Gratuit</option>
-  <option>Payant</option>
-</select>
+        <select [(ngModel)]="nouveauCours.type" name="type" (change)="onTypeChange()">
+          <option>Gratuit</option><option>Payant</option>
+        </select>
 
-<div *ngIf="nouveauCours.type === 'Payant'">
-  <label>Prix (DH) :</label>
-  <input type="number" [(ngModel)]="nouveauCours.prix" name="prix" min="0">
-</div>
+         <div *ngIf="nouveauCours.type == 'Payant'">
+       <label>Prix (DH) :</label>
+       <input type="number" [(ngModel)]="nouveauCours.prix" name="prix" min="0">
+       </div>
 
         <label>Type de document :</label>
         <select [(ngModel)]="nouveauCours.documentType" name="documentType">
-          <option>Cours</option><option>TD</option><option>Examen</option>
+         <option>Cours</option><option>TD</option><option>TP</option><option>Examen</option>
         </select>
 
         <label>Fichier PDF :</label>
@@ -56,7 +49,7 @@
 
         <div class="modal-buttons">
           <button type="submit">Ajouter</button>
-          <button type="button" (click)="closeModal()">Annuler</button>
+          <button type="button" (click)="closeModal('add')">Annuler</button>
         </div>
       </form>
       <div *ngIf="message" class="message">{{ message }}</div>
@@ -64,10 +57,35 @@
   </div>
 </div>
 
+
+<div class="modal-backdrop" *ngIf="showDeleteModal">
+  <div class="modal-content">
+    <div class="container1">
+      <h2>SUPPRIMER MES COURS</h2>
+      <ul>
+        <li *ngFor="let cours of courses" class="cours-item">
+          <div class="info-container">
+            <div class="cours-info">
+              <strong>{{ cours.titre }}</strong> – {{ cours.filiere }}/{{ cours.niveau }} / {{ cours.documentType }} {{ cours.type }}
+              <div class="Payant" *ngIf="cours.type=='Payant'">
+                <p> / <span>{{ cours.prix }} DH</span></p>
+              </div></div>
+              <div class="ad"> <button (click)="SupprimerCours(cours)" class="del"><mat-icon>delete</mat-icon></button></div>
+          </div>
+
+
+        </li>
+      </ul>
+      <div class="modal-buttons1">
+        <button type="button" (click)="closeModal('delete')">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Barre de recherche -->
 <div class="search-bar">
   <input type="text" [(ngModel)]="rechercheCours.titre" placeholder="Rechercher par titre">
-
   <select [(ngModel)]="rechercheCours.filiere">
     <option value="">Toutes les filières</option>
     <option>SMA</option><option>SMI</option><option>SMP</option>
@@ -85,59 +103,54 @@
     <option>Gratuit</option><option>Payant</option>
   </select>
 
-  <select [(ngModel)]="rechercheCours.documentType">
+   <select [(ngModel)]="rechercheCours.documentType">
     <option value="">Tous les types de document</option>
-    <option>Cours</option><option>TD</option><option>Examen</option>
+    <option>Cours</option><option>TD</option><option>TP</option><option>Examen</option>
   </select>
 
   <button (click)="appliquerFiltre()"><mat-icon>search</mat-icon></button>
 </div>
 
+
+
+
+
 <ul>
-<li *ngFor="let cours of coursFiltresAppliques" class="cours-item">
-  <div class="info-container">
-    <div class="cours-info">
-      <!-- Format: [Titre] - [Filière]/[Niveau]/ [Type] ([Prix]) [DocumentType] -->
-      <strong>{{ cours.titre }}</strong> - {{ cours.filiere }}/{{ cours.niveau }}/ 
-      {{ cours.type }} <span *ngIf="cours.type === 'Payant'">({{ cours.prix }} DH)</span> {{ cours.documentType }}
-    </div>
+  <li *ngFor="let cours of coursFiltresAppliques" class="cours-item">
+    <div class="info-container">
+      <div class="cours-info">
+        
+        <strong>{{ cours.titre }}</strong> - {{ cours.filiere }} / {{ cours.niveau }} / {{ cours.documentType }} {{ cours.type }}
+        <span *ngIf="cours.type === 'Payant'">/ {{ cours.prix }} DH</span>
+      </div>
 
-    <div class="actions">
-      <!-- Bouton Payer conditionnel -->
-    <div class="actions">
-  <button *ngIf="cours.type === 'Payant' && !cours.paid" 
-        class="payer-button" 
-        (click)="redirectToPaiement()">
-  💳 Payer
-</button>
+      <!-- Boutons d'action (paiement, voir, télécharger) -->
+   <div class="actions">
 
-</div>
+        <!-- Paiement -->
+        <div *ngIf="cours.type === 'Payant' && !cours.isPaid" class="paiement-section">
+          <div class="actions">
+          <button (click)="methode(cours)" [disabled]="paymentProcessing" class="payer">
+            {{ paymentProcessing && selectedCourseId === cours.id ? 'Paiement...' : 'Payer' }}
+          </button></div>
 
+          <!-- Modal PayPal -->
+          <div class="modal-backdrop2" *ngIf="showPayerModal && selectedCourseId === cours.id">
+            <div class="modal-content">
+              <div class="container">
+                <div [id]="'paypal-button-' + cours.id"></div>
+                <div class="modal-buttons2">
+                  <button type="button" (click)="closeModal('payer')">Annuler</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+     
 
-      <!-- Dans la boucle *ngFor pour chaque cours -->
-<div *ngIf="cours.type === 'Payant'">
-  <!-- Si non payé -->
-  <div *ngIf="!cours.paid" class="payment-section">
-    
-    <div class="payment-buttons">
       
-      
-      <div #paypalContainer [id]="'paypal-container-'+cours.id" class="paypal-container"></div>
-    </div>
-  </div>
-  
-  <!-- Si payé -->
-  <div *ngIf="cours.paid" class="course-content">
-    <button (click)="ouvrirPdf(cours.pdfUrlView)" class="access-button">
-      Accéder au cours
-    </button>
-  </div>
-</div>
- 
-
-<div class="actions">
-<div class="like">
+<div class="like"> 
 <mat-icon
   (click)="toggleLike(cours.id)"
   [ngStyle]="{
@@ -148,43 +161,34 @@
 >
 thumb_up
 </mat-icon>
- 
+
 
 <span>{{ likesCount[cours.id] || 0 }}</span>
 </div>
+        
+        <div class="ad">
+          <div *ngIf="cours.isPaid || cours.type=='Gratuit'" class="access-section">
+        <button (click)="ouvrirPdff(cours.pdfUrlView)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button (click)="telechargerPdff(cours.pdfUrlDownload)">
+          <mat-icon>download</mat-icon>
+        </button></div>
+         <button *ngIf="user.etat=='admin'" (click)="SupprimerCours(cours)"class="del">
+          <mat-icon>delete</mat-icon>
+        </button>
+     </div> 
+ </div>
+      </div>
+    
+  </li>
+</ul>
+
  
+
+
+
+
+
  
-
-    <div class="ad">
-  <!-- Si le cours est gratuit OU déjà payé -->
- <ng-container *ngIf="cours.type === 'Gratuit' || cours.paid">
-  <button (click)="ouvrirPdf(cours.pdfUrlView)">
-    <mat-icon>visibility</mat-icon>
-  </button>
-  <button (click)="telechargerPdf(cours.pdfUrlDownload)">
-    <mat-icon>download</mat-icon>
-  </button>
- 
-</ng-container>
-
-
-  <!-- Si le cours est payant et non encore payé -->
-  <ng-container *ngIf="cours.type === 'Payant' && !cours.paid">
-    <button (click)="afficherAlerte()">
-      <mat-icon>visibility</mat-icon>
-    </button>
-    <button (click)="afficherAlerte()">
-      <mat-icon>download</mat-icon>
-    </button>
-    <button (click)="supprimerCours(cours.coursId)">Supprimer
-  <mat-icon>delete</mat-icon>
-</button>
-
-  </ng-container>
-</div>
-
-  </div>
-  </div>
-
-
-
+</body>

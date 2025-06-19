@@ -13,7 +13,6 @@ import { CoursComponent } from './components/dashboard/cours/cours.component';
 import { DbSidebarComponent } from './components/dashboard/db-sidebar/db-sidebar.component';
 import { DbNavbarComponent } from './components/dashboard/db-navbar/db-navbar.component';
 import { PlanningComponent } from './components/dashboard/planning/planning.component';
-import { PaiementComponent } from './components/dashboard/paiement/paiement.component';
 import { DbFormateurComponent } from './components/dashboard/db-formateur/db-formateur.component';
 import { DbEtudiantComponent } from './components/dashboard/db-etudiant/db-etudiant.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -126,10 +125,6 @@ export const routes: Routes = [
       {
       path : 'planning' ,
           component : PlanningComponent } ,
-
-      {
-       path : 'paiement' ,
-           component : PaiementComponent } ,
 
            {
        path : "profile",

@@ -2,9 +2,14 @@
   margin: 0;
   box-sizing: border-box;
 }
+body{
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;}
 
 #contact {
-  background-color: #410c5a83;
+  background-color: rgb(180, 173, 173);
   display: flex;
   justify-content: center;
   align-items: center;

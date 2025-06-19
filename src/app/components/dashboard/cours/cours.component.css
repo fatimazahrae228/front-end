@@ -1,66 +1,88 @@
-body {
+body{
   font-family: Arial, sans-serif;
   background-color: whitesmoke;
   margin: 0;
-padding-top: 80px;
-  margin-top: 0px;
-
+  padding: 0;
+  margin-top: 74px;
+  padding-top: 10px;
   height: auto;
-}
 
+}
 .container {
   width: 400px;
-  min-height: 100vh;
-  margin: 0 auto;
+  height: 100%;
+  font-size: 85%;
+
+  margin: 40px auto;
   background-color: #f5f5f5;
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
-
-h2 {
+.container1 {
+   max-height: 580px; /* adapte selon tes besoins */
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 75%;
+  height: auto;
+  font-size: 85%;
+  margin: 40px auto;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+h2{
+  font-size: 25px;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  color: rgb(163, 87, 214);
+margin: auto;  
+margin-bottom: 6px;
+color: rgb(163, 87, 214);
 }
 
-form input,
-form select {
+
+form input, form select {
+  outline: none;
+   color: (115, 66, 148);
   width: 100%;
   padding: 8px;
-  margin: 4px 0 12px;
+  margin-top: 4px;
+  margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  outline: none;
-  color: rgb(115, 66, 148);
 }
-
-form button {
-  margin-left: 65px;
-  margin-top: -10px;
-  padding: 7px;
-  font-size: 18px;
-  background-color: rgb(127, 13, 180);
-  color: whitesmoke;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-}
-
-button {
+button{
+  
   font-size: 1px;
-  background-color: rgb(127, 13, 180);
-  color: whitesmoke;
   border: none;
   border-radius: 5px;
-  margin: 5px 3px 0;
+  background-color: rgb(127, 13, 180);
+  margin-top: 5px;
+  margin-right: 3px;
+   margin-left: 3px;
+  color: whitesmoke;
 }
+form button{
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color:rgb(127, 13, 180);
+  color: whitesmoke;
+   margin-left: 65px;
+   padding: 7px;
+   font-size: 18px;
+   outline: none;
+}
+
 
 .modal-backdrop {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -68,21 +90,44 @@ button {
   z-index: 1000;
 }
 
+
 .modal-content {
-  color: rgb(115, 66, 148);
+  color : rgb(115, 66, 148);
+  display: block;
   font-weight: bold;
+}
+.btn{
+  border: none;
+}
+.btn button{
+  border: none;
+  margin-left: 70px;
+  width: 250px;
+  height: 100%;
+  font-size: 22px;
+  padding: 5px;
+  margin-top: 30px;
 }
 
 ul {
   list-style: none;
-  margin: 35px 0 0 110px;
   padding-right: 5px;
+  margin: 35px;
+  margin-left: 110px;
+
+}
+.container1 ul {
+  list-style: none;
+  padding-right: 5px;
+  margin: 35px;
+  margin-left: 10px;
+
 }
 
 li {
-  height: 10vh;
-  background-color: #fff;
-  border-left: 6px solid #ba68c8;
+ height: 10vh;
+  background-color: #ffffff;
+  border-left: 6px solid #ba68c8;;
   margin-bottom: 15px;
   padding: 15px;
   border-radius: 8px;
@@ -91,24 +136,35 @@ li {
 
 li strong {
   font-size: 1.3rem;
-  color: #4a148c;
+  color:#4a148c;
 }
 
-.ad {
-  display: flex;
-  gap: 5px;
-  margin: 0px;
-  justify-content: flex-start; /* 👈 باش يدوزو ليسار */
+li .ad {  
+width:141px;
+margin-top: 0;
 }
 
+button mat-icon{
+width: 29px;
+height: 100%;
 
-button mat-icon {
-  width: 29px;
-  height: 100%;
 }
+.ad{  display: flex;
+  float: right;
+  justify-content: end;
+margin: 10px;
+}
+
+.ad .del {
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
 
 .search-bar {
-  margin: 15px auto 0;
+  margin: auto;
+  margin-top: 15px;
   width: 69%;
   display: flex;
   flex-wrap: wrap;
@@ -121,18 +177,18 @@ button mat-icon {
 }
 
 .search-bar input[type="text"],
-.search-bar select {
+.search-bar select { 
   text-align: center;
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  min-width: 150px;
+  min-width:150px;
   font-size: 14px;
   outline: none;
 }
 
 .search-bar button {
-  background-color: rgb(127, 13, 180);
+  background-color:  rgb(127, 13, 180);
   color: white;
   border: none;
   padding: 5px 21px;
@@ -141,150 +197,138 @@ button mat-icon {
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
-
-.file-type-tag {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
+.file-type-tag{
+ float:inline-end;
+ transform: translateY(-41px);
+ margin-right: 170px;
+}
+ #fileType{
+font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgba(190, 189, 189, 0.356);
+  color: purple;
 }
 
-.file-type-tag.pdf { background-color: #ff6b6b; color: white; }
-.file-type-tag.image { background-color: #4ecdc4; color: white; }
-.file-type-tag.video { background-color: #ff9f1c; color: white; }
+
+
 
 .info-container {
   display: flex;
   justify-content: space-between;
+
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.liked {
+  position: relative;
+  color: red !important;
+}
+.not-liked {
+  color: gray !important;
+}
 .actions {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.liked { color: red !important; }
-.not-liked { color: gray !important; }
-
 .like {
-  margin-bottom: 20px;
+margin-bottom: 30px;
+
+ 
   gap: 8px;
-  margin-right: 159px;
+  margin-right: 20px;
 }
 
 .likenbr {
-  position: static;
+  position: static; 
   margin: 0;
+  
+}
+.payant{
+  background-color: #ba68c8;
 }
 
-/* Modal Compact */
-.modal-content.compact {
-  width: 380px;
-  padding: 15px;
+.Payant{
+    display: inline-block;
+  justify-content: center;
 }
-.modal-content.compact h2 {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
+.modal-buttons1 button{
+  width: 10%;
+  height: 100%;
+  font-size: 20px;
+  margin: auto;
+  display: block;
+  justify-content: end;
 }
-.modal-content.compact label,
-.modal-content.compact input,
-.modal-content.compact select {
-  font-size: 0.85rem;
-  margin-bottom: 8px;
-  padding: 6px;
+.container1 .ad {
+width:48px;
 }
-.form-row {
-  display: flex;
-  gap: 10px;
-}
-.form-group {
-  flex: 1;
-}
-.modal-content.compact .modal-buttons button {
-  padding: 6px 12px;
-  font-size: 0.85rem;
-}
+.btn .sup {
+ font-size: 1.4rem;
+margin-left: 751px;
 
-/* Buttons */
-.payment-buttons {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
 }
-.access-button {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-}
-
-.price-label {
-  font-size: 0.9rem;
-  margin-bottom: 5px;
-  color: #555;
-}
-.price-amount {
-  font-weight: bold;
-  color: #0070ba;
-}
-.pay-button {
-  background-color: #0070ba;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: -23px;
-}
-.price-small {
-  font-size: 0.8rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 2px 5px;
-  border-radius: 3px;
-}
-
-.payment-section {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin: 8px 0;
-}
-
-.payer-button {
-  background-color: #8000ff;
+.payer {
+  font-size: 20px;
+margin-top: 0px;
+margin-bottom: 30px;
+margin-right: 30px;
+display: inline-block;
+  background-color: rgb(127, 13, 180);
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 5px 14px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-.payer-button:hover {
-  background-color: #5e00c2;
+
 }
 
-.access-msg {
-  color: red;
-  font-weight: bold;
-  margin-left: 10px;
+
+
+.modal-backdrop2{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
-.btn>button{
-  width: 80%;
-  height: 80%;
-  padding: 10px;
+.modal-buttons2 button{
+  width: 30%;
+  height: 100%;
   font-size: 20px;
-  margin-left: 80px;
+  margin: auto;
+  display: block;
+  justify-content: center;
+}
+
+
+
+
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+span{
+ 
+  font-weight: bold;
 }

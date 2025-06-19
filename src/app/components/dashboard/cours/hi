@@ -98,7 +98,7 @@ userId : number | null = null ;
         this.loadUserEvaluations();
 
         // ✅ Appeler après avoir reçu le user
-        this.getCours();
+        this.getCoursPayants();
       });
     } catch (e) {
       console.error("Erreur parsing JSON:", e);
@@ -119,7 +119,6 @@ getCours(): void {
     this.listeCours = data;
 
     this.listeCours.forEach(cours => {
-      // Détection du type de fichier
       const extension = cours.fichierNom?.split('.').pop()?.toLowerCase();
 
       let fileType = 'autre';
@@ -131,20 +130,21 @@ getCours(): void {
         } else if (extension === 'pdf') {
           fileType = 'pdf';
         }
+        
       }
 
       cours.fileType = fileType;
 
-      // Générer les URLs
+      // Ajouter les URLs de visualisation / téléchargement
       cours.pdfUrlView = this.getPdfUrl(cours.id, false);
       cours.pdfUrlDownload = this.getPdfUrl(cours.id, true);
-
-      // ✅ Vérification paiement
-      this.checkPaidStatus(cours);
+    
+         
     });
 
-    this.coursFiltresAppliques = [...this.listeCours];
-  });}
+    this.coursFiltresAppliques = [...this.listeCours]; // Copie pour les filtres
+  });
+}
 
  openModal(type: 'add' | 'delete' | 'payer') {
   if (type === 'add') {
@@ -393,7 +393,7 @@ loadPaypalScript(): void {
     });
   }
 
- checkIfPaid(cours: Cours){
+ checkIfPaid(cours: Cours): void {
   const userId = this.user.id;
 
   this.http.get<boolean>(`${this.API_URL}/api/payments/check?userId=${userId}&courseId=${cours.id}`)
@@ -443,32 +443,33 @@ loadPaypalScript(): void {
       }).render(`#${containerId}`);
     }, 300);
   }
-enregistrerPaiement(cours: Cours): void {
-  const data = {
-    user: { id: this.user.id },
-    course: { id: cours.id },
-    amount: cours.prix,
-    paymentDate: new Date().toISOString()
-  };
 
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
+  enregistrerPaiement(cours: Cours): void {
+    const data = {
+      userId: this.user.id,
+      courseId: cours.id,
+      amount: cours.prix,
+      paymentDate: new Date().toISOString()
+    };
 
-  this.http.post(`${this.API_URL}/api/payments`, data, { headers })
-    .subscribe({
-      next: () => {
-        this.paymentProcessing = false;
-        this.selectedCourseId = null;
-        alert('Paiement enregistré avec succès');
-      },
-      error: (err) => {
-        console.error('Erreur backend:', err);
-        this.paymentProcessing = false;
-      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-}
- 
+
+    this.http.post(`${this.API_URL}/api/payments`, data, { headers })
+      .subscribe({
+        next: () => {
+          this.paymentProcessing = false;
+          this.selectedCourseId = null;
+          alert('Paiement enregistré avec succès');
+        },
+        error: (err) => {
+          console.error('Erreur backend:', err);
+          this.paymentProcessing = false;
+        }
+      });
+  }
+
   convertDhToUsdNumber(dh: number): string {
     return (dh / 10).toFixed(2);
   }
@@ -491,20 +492,7 @@ methode(cours: Cours) {
   this.initierPaiement(cours);
 }
 
-checkPaidStatus(cours: Cours): void {
-  if (!this.user || !cours) return;
 
-  this.http.get<boolean>(`${this.API_URL}/api/payments/check?userId=${this.user.id}&courseId=${cours.id}`)
-    .subscribe((isPaid: boolean) => {
-      cours.isPaid = isPaid;
-
-      // Génère les URLs après confirmation
-      cours.pdfUrlView = this.getPdfUrl(cours.id, false);
-      cours.pdfUrlDownload = this.getPdfUrl(cours.id, true);
-    }, error => {
-      console.error(`Erreur de vérification paiement pour le cours ${cours.id}`, error);
-    });
-}
 
   }
   

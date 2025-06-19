@@ -1,61 +1,5 @@
-<!-- Modal d'ajout -->
-
-
-
 <body>
   
-
-
-
-
-<div class="modal-backdrop" *ngIf="showModal">
-  <div class="modal-content">
-    <div class="container">
-      <h2>Ajouter un module</h2>
-      <form (ngSubmit)="submitCours()">
-        <label>Titre du module :</label>
-        <input type="text" [(ngModel)]="nouveauCours.titre" name="titre" required>
-
-        <label>Filière :</label>
-        <select [(ngModel)]="nouveauCours.filiere" name="filiere">
-          <option>SMA</option><option>SMI</option><option>SMP</option>
-          <option>SMC</option><option>SVI</option><option>STU</option>
-        </select>
-
-        <label>Niveau :</label>
-        <select [(ngModel)]="nouveauCours.niveau" name="niveau">
-          <option>S1</option><option>S2</option><option>S3</option>
-          <option>S4</option><option>S5</option><option>S6</option>
-        </select>
-
-        <label>Type :</label>
-<select [(ngModel)]="nouveauCours.type" name="type" (change)="onTypeChange()">
-  <option>Gratuit</option>
-  <option>Payant</option>
-</select>
-
-<div *ngIf="nouveauCours.type === 'Payant'">
-  <label>Prix (DH) :</label>
-  <input type="number" [(ngModel)]="nouveauCours.prix" name="prix" min="0">
-</div>
-
-        <label>Type de document :</label>
-        <select [(ngModel)]="nouveauCours.documentType" name="documentType">
-          <option>Cours</option><option>TD</option><option>Examen</option>
-        </select>
-
-        <label>Fichier PDF :</label>
-        <input type="file" (change)="onFileSelected($event)" required>
-
-        <div class="modal-buttons">
-          <button type="submit">Ajouter</button>
-          <button type="button" (click)="closeModal()">Annuler</button>
-        </div>
-      </form>
-      <div *ngIf="message" class="message">{{ message }}</div>
-    </div>
-  </div>
-</div>
 
 <!-- Barre de recherche -->
 <div class="search-bar">
@@ -92,7 +36,7 @@
     <div class="cours-info">
       <!-- Format: [Titre] - [Filière]/[Niveau]/ [Type] ([Prix]) [DocumentType] -->
       <strong>{{ cours.titre }}</strong> - {{ cours.filiere }}/{{ cours.niveau }}/ 
-      {{ cours.type }} <span *ngIf="cours.type === 'Payant'">({{ cours.prix }} DH)</span> {{ cours.documentType }}
+      {{ cours.documentType }} - {{ cours.type }} (<span *ngIf="cours.type === 'Payant'">{{ cours.prix }} DH</span>) 
     </div>
 
     <div class="actions">
@@ -101,7 +45,7 @@
   <button *ngIf="cours.type === 'Payant' && !cours.paid" 
         class="payer-button" 
         (click)="openModal()">
-  💳 Payer
+ Payer
 </button>
 <div class="modal-backdrop" *ngIf="showModal">
   <div class="modal-content">
